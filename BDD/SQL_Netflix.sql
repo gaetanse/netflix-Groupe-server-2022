@@ -32,7 +32,6 @@ CREATE TABLE ressources (
 	categorie int not null,
 	tags varchar(200) not null,
 	[description] varchar(100) not null,
-	images varchar(200) not null,
 	contenu varchar(200) not null,
 	trailerVideo varchar(200),
 	nbEpisode int,
@@ -44,7 +43,8 @@ DROP TABLE images
 CREATE TABLE images (
 	id int not null PRIMARY KEY IDENTITY(1,1),
 	[url] varchar(100) not null,
-	type varchar(100) not null
+	[type] varchar(100) not null,
+	ressourceId int not null
 );
 
 DROP TABLE tags
