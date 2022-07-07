@@ -1,5 +1,5 @@
-﻿using ConsoleApp2.classes;
-using NetflixServer.Classes;
+﻿using NetflixServer.Classes;
+using netflixTestConsole.database.classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;

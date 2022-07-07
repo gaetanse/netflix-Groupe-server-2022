@@ -1,13 +1,17 @@
-﻿using ConsoleApp2.classes;
-using Microsoft.EntityFrameworkCore;
-using NetflixServerConsoleTest.classes;
+﻿using Microsoft.EntityFrameworkCore;
+using netflixTestConsole.database.classes;
 
 namespace CoursEntityFrameWorkCore
 {
     public class DataContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
+        public DbSet<Category> Categorys { get; set; }
         public DbSet<Faq> Faqs { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<Ressource> Ressources { get; set; }
+        public DbSet<Statut> Statuts { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<User> Users { get; set; }
         public DataContext() : base(){  }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

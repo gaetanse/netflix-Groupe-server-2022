@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp2.classes
+namespace netflixTestConsole.database.classes
 {
-    public class Faq
+    public class Category
     {
         public int Id { get; set; }
-        public string Question { get; set; }
-        public string Response { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }

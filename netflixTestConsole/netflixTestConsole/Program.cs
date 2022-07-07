@@ -1,7 +1,6 @@
-﻿using ConsoleApp2.classes;
-using ConsoleApp2.database;
+﻿using ConsoleApp2.database;
 using NetflixServer.Classes;
-using NetflixServerConsoleTest.classes;
+using netflixTestConsole.database.classes;
 
 namespace NetflixServer
 {
