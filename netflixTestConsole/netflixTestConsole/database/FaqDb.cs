@@ -21,8 +21,7 @@ namespace ConsoleApp2.database
             };
 
             Netflix.dataContext.Faqs.Add(faq);
-            if (Netflix.dataContext.SaveChanges() != 0) return true;
-            return false;
+            return Netflix.Save();
         }
         public static Faq GetById(int id)
         {

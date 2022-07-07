@@ -10,7 +10,7 @@ namespace ConsoleApp2.database
 {
     public static class UserDb
     {
-        public static bool Add(string lastName, string firstName, int numberStatus, string mail, string password)
+        public static bool Add(string lastName, string firstName, int statutId, string mail, string password)
         {
             //register //check if != null
 
@@ -18,14 +18,13 @@ namespace ConsoleApp2.database
             {
                 LastName = lastName,
                 FirstName = firstName,
-                NumberStatut = numberStatus,
+                StatutId = statutId,
                 Mail = mail,
                 Password = password
             };
 
             Netflix.dataContext.Users.Add(user);
-            if (Netflix.dataContext.SaveChanges() != 0) return true;
-            return false;
+            return Netflix.Save();
         }
 
         public static bool Login(string mail, string password)

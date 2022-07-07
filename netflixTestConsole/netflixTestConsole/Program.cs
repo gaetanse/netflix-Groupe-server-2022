@@ -1,5 +1,6 @@
 ﻿using ConsoleApp2.database;
 using NetflixServer.Classes;
+using netflixTestConsole.database;
 using netflixTestConsole.database.classes;
 
 namespace NetflixServer
@@ -53,6 +54,32 @@ namespace NetflixServer
             {
                 Console.WriteLine("error user is null");
             }
+
+            if(CategoryDb.Add("test", "test description"))
+            {
+                Console.WriteLine("création d'une catégorie");
+            }
+            else
+            {
+                Console.WriteLine("impossible de creer une catégorie");
+            }
+
+            Tag tag = new Tag() { Name = "nom", Description = "description du tag" };
+
+            if (TagDb.Add("nom", "description"))
+            {
+                Console.WriteLine("création d'un tag");
+            }
+            else
+            {
+
+            }
+
+            StatutDb.Add("name", "description");
+
+            RessourceDb.Add("title",0,new List<Tag>() { tag, tag, tag, tag },"description","content","trailer",50,5);
+
+            ImageDataDb.Add("url", "type", 0);
 
             //List<User> users = new List<User>();
             //users = netflix.RequestGetAllUser();

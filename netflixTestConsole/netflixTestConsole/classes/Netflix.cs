@@ -1,5 +1,4 @@
 using CoursEntityFrameWorkCore;
-using NetflixServerConsoleTest.classes;
 
 namespace NetflixServer.Classes
 {
@@ -10,6 +9,11 @@ namespace NetflixServer.Classes
         public Netflix()
         {
             dataContext = new DataContext();
+        }
+
+        public static bool Save()
+        {
+            return dataContext.SaveChanges() > 0 ? true : false;
         }
 
     }

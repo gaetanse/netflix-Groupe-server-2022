@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace netflixTestConsole.database
 {
-    public class TagDb
+    public class CategoryDb
     {
         public static bool Add(string name, string description)
         {
             //register //check if != null
 
-            Tag faq = new Tag()
+            Category faq = new Category()
             {
                 Name = name,
                 Description = description
             };
 
-            Netflix.dataContext.Tags.Add(faq);
+            Netflix.dataContext.Categorys.Add(faq);
             return Netflix.Save();
         }
     }
