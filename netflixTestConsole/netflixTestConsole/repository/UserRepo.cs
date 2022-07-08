@@ -36,19 +36,6 @@ namespace ConsoleApp2.database
             return false;
         }*/
 
-        public static User GetById(int id)
-        {
-            //get user with a id
-            return Netflix.dataContext.Users.Find(id);
-        }
-
-        public static List<User> GetAll()
-        {
-            //get all users
-            List<User> list = Netflix.dataContext.Users.ToList();
-            return list;
-        }
-
         public static User GetByLastName(string lastName)
         {
             //get all users by something
@@ -69,15 +56,20 @@ namespace ConsoleApp2.database
             return Netflix.Save();
         }
 
-        public override bool Update(User element)
-        {
-            throw new NotImplementedException();
-        }
+        //public override bool Update(User element)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public override List<User> FindAllBy(Predicate<User> predicate)
-        {
-            throw new NotImplementedException();
-        }
+        //public override List<User> FindAllBy(Predicate<User> predicate)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public override User FindBy(Predicate<User> predicate)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public override bool Remove(int id)
         {
@@ -87,17 +79,12 @@ namespace ConsoleApp2.database
 
         public override User FindById(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public override User FindBy(Predicate<User> predicate)
-        {
-            throw new NotImplementedException();
+            return Netflix.dataContext.Users.Find(id);
         }
 
         public override List<User> FindAll()
         {
-            throw new NotImplementedException();
+            return Netflix.dataContext.Users.ToList();
         }
     }
 }

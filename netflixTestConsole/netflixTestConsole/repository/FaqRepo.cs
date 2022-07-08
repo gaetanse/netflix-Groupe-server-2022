@@ -14,22 +14,22 @@ namespace ConsoleApp2.database
 
         public override List<Faq> FindAll()
         {
-            throw new NotImplementedException();
+            return Netflix.dataContext.Faqs.ToList();
         }
 
-        public override List<Faq> FindAllBy(Predicate<Faq> predicate)
-        {
-            throw new NotImplementedException();
-        }
+        //public override List<Faq> FindAllBy(Predicate<Faq> predicate)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public override Faq FindBy(Predicate<Faq> predicate)
-        {
-            throw new NotImplementedException();
-        }
+        //public override Faq FindBy(Predicate<Faq> predicate)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public override Faq FindById(int id)
         {
-            throw new NotImplementedException();
+            return Netflix.dataContext.Faqs.Find(id);
         }
 
         public override bool Remove(int id)
@@ -37,9 +37,9 @@ namespace ConsoleApp2.database
             throw new NotImplementedException();
         }
 
-        public override bool Update(Faq element)
-        {
-            throw new NotImplementedException();
-        }
+        //public override bool Update(Faq element)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

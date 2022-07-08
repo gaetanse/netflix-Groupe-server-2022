@@ -18,22 +18,22 @@ namespace netflixTestConsole.database
 
         public override List<Ressource> FindAll()
         {
-            throw new NotImplementedException();
+            return Netflix.dataContext.Ressources.ToList();
         }
 
-        public override List<Ressource> FindAllBy(Predicate<Ressource> predicate)
-        {
-            throw new NotImplementedException();
-        }
+        //public override List<Ressource> FindAllBy(Predicate<Ressource> predicate)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public override Ressource FindBy(Predicate<Ressource> predicate)
-        {
-            throw new NotImplementedException();
-        }
+        //public override Ressource FindBy(Predicate<Ressource> predicate)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public override Ressource FindById(int id)
         {
-            throw new NotImplementedException();
+            return Netflix.dataContext.Ressources.Find(id);
         }
 
         public override bool Remove(int id)
@@ -41,9 +41,9 @@ namespace netflixTestConsole.database
             throw new NotImplementedException();
         }
 
-        public override bool Update(Ressource element)
-        {
-            throw new NotImplementedException();
-        }
+        //public override bool Update(Ressource element)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

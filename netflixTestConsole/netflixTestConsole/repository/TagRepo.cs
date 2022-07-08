@@ -22,18 +22,18 @@ namespace netflixTestConsole.database
 
         public override List<Tag> FindAll()
         {
-            throw new NotImplementedException();
+            return Netflix.dataContext.Tags.ToList();
         }
 
-        public override List<Tag> FindAllBy(Predicate<Tag> predicate)
-        {
-            throw new NotImplementedException();
-        }
+        //public override List<Tag> FindAllBy(Predicate<Tag> predicate)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public override Tag FindBy(Predicate<Tag> predicate)
-        {
-            throw new NotImplementedException();
-        }
+        //public override Tag FindBy(Predicate<Tag> predicate)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public override Tag FindById(int id)
         {
@@ -45,9 +45,9 @@ namespace netflixTestConsole.database
             throw new NotImplementedException();
         }
 
-        public override bool Update(Tag element)
-        {
-            throw new NotImplementedException();
-        }
+        //public override bool Update(Tag element)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

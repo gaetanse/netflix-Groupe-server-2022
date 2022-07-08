@@ -18,22 +18,22 @@ namespace netflixTestConsole.database
 
         public override List<Category> FindAll()
         {
-            throw new NotImplementedException();
+            return Netflix.dataContext.Categorys.ToList();
         }
 
-        public override List<Category> FindAllBy(Predicate<Category> predicate)
-        {
-            throw new NotImplementedException();
-        }
+        //public override List<Category> FindAllBy(Predicate<Category> predicate)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public override Category FindBy(Predicate<Category> predicate)
-        {
-            throw new NotImplementedException();
-        }
+        //public override Category FindBy(Predicate<Category> predicate)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public override Category FindById(int id)
         {
-            throw new NotImplementedException();
+            return Netflix.dataContext.Categorys.Find(id);
         }
 
         public override bool Remove(int id)
@@ -41,9 +41,9 @@ namespace netflixTestConsole.database
             throw new NotImplementedException();
         }
 
-        public override bool Update(Category element)
-        {
-            throw new NotImplementedException();
-        }
+        //public override bool Update(Category element)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

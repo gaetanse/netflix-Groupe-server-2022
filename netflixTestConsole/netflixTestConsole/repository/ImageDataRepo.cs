@@ -20,22 +20,22 @@ namespace netflixTestConsole.database
 
         public override List<ImageData> FindAll()
         {
-            throw new NotImplementedException();
+            return Netflix.dataContext.ImageDatas.ToList();
         }
 
-        public override List<ImageData> FindAllBy(Predicate<ImageData> predicate)
-        {
-            throw new NotImplementedException();
-        }
+        //public override List<ImageData> FindAllBy(Predicate<ImageData> predicate)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public override ImageData FindBy(Predicate<ImageData> predicate)
-        {
-            throw new NotImplementedException();
-        }
+        //public override ImageData FindBy(Predicate<ImageData> predicate)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public override ImageData FindById(int id)
         {
-            throw new NotImplementedException();
+            return Netflix.dataContext.ImageDatas.Find(id);
         }
 
         public override bool Remove(int id)
@@ -43,9 +43,9 @@ namespace netflixTestConsole.database
             throw new NotImplementedException();
         }
 
-        public override bool Update(ImageData element)
-        {
-            throw new NotImplementedException();
-        }
+        //public override bool Update(ImageData element)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

@@ -15,7 +15,9 @@ namespace CoursEntityFrameWorkCore
         public DbSet<Faq> Faqs { get; set; }
         public DbSet<ImageData> ImageDatas { get; set; }
         public DbSet<Tag> Tags { get; set; }
-        public DbSet<Statut> Statut { get; set; }
+        public DbSet<Statut> Statuts { get; set; }
+        public DbSet<Category> Categorys { get; set; }
+        public DbSet<Ressource> Ressources { get; set; }
         public DataContext() : base(){  }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

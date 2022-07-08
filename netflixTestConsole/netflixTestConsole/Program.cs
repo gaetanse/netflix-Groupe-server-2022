@@ -16,15 +16,6 @@ namespace NetflixServer
             Statut statutAdmin = Netflix.StatutRepo.FindById(Constants.statutAdminNumber);
             Statut statutCreator = Netflix.StatutRepo.FindById(Constants.statutCreatorNumber);
 
-            /*User user = new(){
-                LastName = "test",
-                FirstName = "test",
-                StatutId = statutUser.Id,
-                Statut = statutUser,
-                Mail = "test@gmail.com",
-                Password = "123"
-            };*/
-
             if (Netflix.UserRepo.Create(new()
             {
                 LastName = "test",
@@ -40,6 +31,8 @@ namespace NetflixServer
             {
                 Console.WriteLine("user cannot be create");
             }
+
+            Console.WriteLine("user 1"+Netflix.UserRepo.FindById(1));
 
             if (Netflix.UserRepo.Create(new()
             {
