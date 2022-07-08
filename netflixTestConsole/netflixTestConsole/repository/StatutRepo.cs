@@ -21,16 +21,6 @@ namespace netflixTestConsole.database
             return Netflix.dataContext.Statuts.ToList();
         }
 
-        //public override List<Statut> FindAllBy(Predicate<Statut> predicate)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public override Statut FindBy(Predicate<Statut> predicate)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         public override Statut FindById(int id)
         {
             return Netflix.dataContext.Statuts.Find(id);
@@ -38,12 +28,8 @@ namespace netflixTestConsole.database
 
         public override bool Remove(int id)
         {
-            throw new NotImplementedException();
+            Netflix.dataContext.Remove(Netflix.dataContext.Statuts.Single(a => a.Id == id));
+            return Netflix.Save();
         }
-
-        //public override bool Update(Statut element)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

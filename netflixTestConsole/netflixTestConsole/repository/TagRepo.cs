@@ -25,16 +25,6 @@ namespace netflixTestConsole.database
             return Netflix.dataContext.Tags.ToList();
         }
 
-        //public override List<Tag> FindAllBy(Predicate<Tag> predicate)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public override Tag FindBy(Predicate<Tag> predicate)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         public override Tag FindById(int id)
         {
             return Netflix.dataContext.Tags.Find(id);
@@ -42,12 +32,8 @@ namespace netflixTestConsole.database
 
         public override bool Remove(int id)
         {
-            throw new NotImplementedException();
+            Netflix.dataContext.Remove(Netflix.dataContext.Tags.Single(a => a.Id == id));
+            return Netflix.Save();
         }
-
-        //public override bool Update(Tag element)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

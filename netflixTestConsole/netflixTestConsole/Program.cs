@@ -32,7 +32,7 @@ namespace NetflixServer
                 Console.WriteLine("user cannot be create");
             }
 
-            Console.WriteLine("user 1"+Netflix.UserRepo.FindById(1));
+            Console.WriteLine("user 1 : "+Netflix.UserRepo.FindById(1).Statut.Name);
 
             if (Netflix.UserRepo.Create(new()
             {

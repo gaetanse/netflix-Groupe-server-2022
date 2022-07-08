@@ -1,4 +1,5 @@
 ﻿using BankEntityFrameWork.Repositories;
+using Microsoft.EntityFrameworkCore;
 using NetflixServer.Classes;
 using netflixTestConsole.database.classes;
 using System;
@@ -56,21 +57,6 @@ namespace ConsoleApp2.database
             return Netflix.Save();
         }
 
-        //public override bool Update(User element)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public override List<User> FindAllBy(Predicate<User> predicate)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public override User FindBy(Predicate<User> predicate)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         public override bool Remove(int id)
         {
             Netflix.dataContext.Remove(Netflix.dataContext.Users.Single(a => a.Id == id));
@@ -79,12 +65,12 @@ namespace ConsoleApp2.database
 
         public override User FindById(int id)
         {
-            return Netflix.dataContext.Users.Find(id);
+            return Netflix.dataContext.Users.Include(u => u.Statut).Where(x => x.Id == id).First();
         }
 
         public override List<User> FindAll()
         {
-            return Netflix.dataContext.Users.ToList();
+            return Netflix.dataContext.Users.Include(u => u.Statut).ToList();
         }
     }
 }

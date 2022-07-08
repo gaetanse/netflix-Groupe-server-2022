@@ -17,16 +17,6 @@ namespace ConsoleApp2.database
             return Netflix.dataContext.Faqs.ToList();
         }
 
-        //public override List<Faq> FindAllBy(Predicate<Faq> predicate)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public override Faq FindBy(Predicate<Faq> predicate)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         public override Faq FindById(int id)
         {
             return Netflix.dataContext.Faqs.Find(id);
@@ -34,12 +24,8 @@ namespace ConsoleApp2.database
 
         public override bool Remove(int id)
         {
-            throw new NotImplementedException();
+            Netflix.dataContext.Remove(Netflix.dataContext.Faqs.Single(a => a.Id == id));
+            return Netflix.Save();
         }
-
-        //public override bool Update(Faq element)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

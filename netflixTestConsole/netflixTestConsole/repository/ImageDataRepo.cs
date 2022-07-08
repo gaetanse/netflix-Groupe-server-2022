@@ -20,32 +20,20 @@ namespace netflixTestConsole.database
 
         public override List<ImageData> FindAll()
         {
+            //use include
             return Netflix.dataContext.ImageDatas.ToList();
         }
 
-        //public override List<ImageData> FindAllBy(Predicate<ImageData> predicate)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public override ImageData FindBy(Predicate<ImageData> predicate)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         public override ImageData FindById(int id)
         {
+            //use include
             return Netflix.dataContext.ImageDatas.Find(id);
         }
 
         public override bool Remove(int id)
         {
-            throw new NotImplementedException();
+            Netflix.dataContext.Remove(Netflix.dataContext.ImageDatas.Single(a => a.Id == id));
+            return Netflix.Save();
         }
-
-        //public override bool Update(ImageData element)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }
