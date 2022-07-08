@@ -30,7 +30,7 @@ namespace NetflixServer
                 Console.WriteLine("user cannot be create");
             }
 
-            Faq faq = new Faq() { 
+            Faq faq = new() { 
                 Question = "la question", 
                 Response = "La reponse" 
             };
@@ -44,9 +44,50 @@ namespace NetflixServer
                 Console.WriteLine("faq cannot be create");
             }
 
-            ImageData imageData = new ImageData()
+            Category category = new Category()
             {
-                //remplir
+                Id = 0,
+                Name = "name",
+                Description = "description"
+            };
+
+            Tag tag = new()
+            {
+                Id = 0,
+                Name = "name",
+                Description = "description"
+            };
+
+            List<Tag> tags = new List<Tag>()
+            {
+                tag,
+                tag,
+                tag,
+                tag
+            };
+
+            Ressource ressource = new()
+            {
+                Id = 0,
+                Title = "title",
+                CategoryId = category.Id,
+                Category = category,
+                TagId = tag.Id,
+                Tags = tags,
+                Description = "description",
+                Content = "content",
+                Trailer = "trailer",
+                NbEpisodes = 50,
+                NbSaisons = 3
+            };
+
+            ImageData imageData = new()
+            {
+
+                Url = "url",
+                Type = "type",
+                RessourceId = ressource.Id,
+                Ressource = ressource
             };
 
             if (Netflix.ImageDataRepo.Create(imageData))
