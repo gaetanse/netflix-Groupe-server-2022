@@ -18,12 +18,27 @@ namespace netflixTestConsole.database
             return Netflix.Save();
         }
 
-        public override ImageData Find(Predicate<ImageData> predicate)
+        public override List<ImageData> FindAll()
         {
             throw new NotImplementedException();
         }
 
-        public override List<ImageData> FindAll(Predicate<ImageData> predicate)
+        public override List<ImageData> FindAllBy(Predicate<ImageData> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override ImageData FindBy(Predicate<ImageData> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override ImageData FindById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Remove(int id)
         {
             throw new NotImplementedException();
         }

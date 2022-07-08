@@ -12,22 +12,67 @@ namespace NetflixServer
         {
             Netflix.StartApp();
 
-            User user = new(){
-                LastName = "lastName",
-                FirstName = "firstName",
-                StatutId = Constants.StatutUser.Id,
-                Statut = Constants.StatutUser,
+            Statut statutUser = Netflix.StatutRepo.FindById(Constants.statutUserNumber);
+            Statut statutAdmin = Netflix.StatutRepo.FindById(Constants.statutAdminNumber);
+            Statut statutCreator = Netflix.StatutRepo.FindById(Constants.statutCreatorNumber);
+
+            /*User user = new(){
+                LastName = "test",
+                FirstName = "test",
+                StatutId = statutUser.Id,
+                Statut = statutUser,
                 Mail = "test@gmail.com",
                 Password = "123"
-            };
+            };*/
 
-            if (Netflix.UserRepo.Create(user))
+            if (Netflix.UserRepo.Create(new()
             {
+                LastName = "test",
+                FirstName = "test",
+                StatutId = statutUser.Id,
+                Statut = statutUser,
+                Mail = "test@gmail.com",
+                Password = "123"
+            })){
                 Console.WriteLine("user create");
             }
             else
             {
                 Console.WriteLine("user cannot be create");
+            }
+
+            if (Netflix.UserRepo.Create(new()
+            {
+                LastName = "admin",
+                FirstName = "admin",
+                StatutId = statutAdmin.Id,
+                Statut = statutAdmin,
+                Mail = "test@gmail.com",
+                Password = "123"
+            }))
+            {
+                Console.WriteLine("admin create");
+            }
+            else
+            {
+                Console.WriteLine("admin cannot be create");
+            }
+
+            if (Netflix.UserRepo.Create(new()
+            {
+                LastName = "creator",
+                FirstName = "creator",
+                StatutId = statutCreator.Id,
+                Statut = statutCreator,
+                Mail = "test@gmail.com",
+                Password = "123"
+            }))
+            {
+                Console.WriteLine("creator create");
+            }
+            else
+            {
+                Console.WriteLine("creator cannot be create");
             }
 
             Faq faq = new() { 

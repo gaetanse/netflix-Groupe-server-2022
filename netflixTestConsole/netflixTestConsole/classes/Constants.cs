@@ -9,9 +9,9 @@ namespace netflixTestConsole.classes
 {
     public static class Constants
     {
-        public static Statut StatutUser { get; set; }
-        public static Statut StatutAdmin { get; set; }
-        public static Statut StatutCreator { get; set; }
+        public const ushort statutUserNumber = 1;
+        public const ushort statutAdminNumber = 2;
+        public const ushort statutCreatorNumber = 3;
 
         public const ushort categoryNameSize = 50;
         public const ushort categoryDescriptionSize = 200;
@@ -36,11 +36,5 @@ namespace netflixTestConsole.classes
         public const ushort userFirstNameSize = 50;
         public const ushort userMailSize = 200;
         public const ushort userPasswordSize = 200;
-        public static void Create()
-        {
-            StatutUser = new Statut() { Id = 0, Name = "user" };
-            StatutAdmin = new Statut() { Id = 1, Name = "admin" };
-            StatutCreator = new Statut() { Id = 2, Name = "creator" };
-        }
     }
 }

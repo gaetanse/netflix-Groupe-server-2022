@@ -11,13 +11,16 @@ namespace NetflixServer.Classes
         public static UserRepo UserRepo { get; set; }
         public static FaqRepo FaqRepo { get; set; }
         public static ImageDataRepo ImageDataRepo { get; set; }
+        public static TagRepo TagRepo { get; set; }
+        public static StatutRepo StatutRepo { get; set; }
         public static void StartApp()
         {
-            dataContext = new DataContext();
-            Constants.Create();
-            UserRepo = new UserRepo();
-            FaqRepo = new FaqRepo();
-            ImageDataRepo = new ImageDataRepo();
+            dataContext = new();
+            UserRepo = new();
+            FaqRepo = new();
+            ImageDataRepo = new();
+            TagRepo = new();
+            StatutRepo = new();
         }
 
         public static bool Save()

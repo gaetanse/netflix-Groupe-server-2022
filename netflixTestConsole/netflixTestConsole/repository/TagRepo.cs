@@ -16,17 +16,31 @@ namespace netflixTestConsole.database
 
         public override bool Create(Tag element)
         {
-            /*Netflix.dataContext.Tags.Add(element);
-            return Netflix.Save();*/
-            throw new NotImplementedException();
+            Netflix.dataContext.Tags.Add(element);
+            return Netflix.Save();
         }
 
-        public override Tag Find(Predicate<Tag> predicate)
+        public override List<Tag> FindAll()
         {
             throw new NotImplementedException();
         }
 
-        public override List<Tag> FindAll(Predicate<Tag> predicate)
+        public override List<Tag> FindAllBy(Predicate<Tag> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Tag FindBy(Predicate<Tag> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Tag FindById(int id)
+        {
+            return Netflix.dataContext.Tags.Find(id);
+        }
+
+        public override bool Remove(int id)
         {
             throw new NotImplementedException();
         }

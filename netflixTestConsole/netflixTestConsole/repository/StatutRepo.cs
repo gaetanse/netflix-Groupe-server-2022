@@ -1,4 +1,5 @@
-﻿using NetflixServer.Classes;
+﻿using BankEntityFrameWork.Repositories;
+using NetflixServer.Classes;
 using netflixTestConsole.database.classes;
 using System;
 using System.Collections.Generic;
@@ -8,19 +9,41 @@ using System.Threading.Tasks;
 
 namespace netflixTestConsole.database
 {
-    public class StatutRepo
+    public class StatutRepo : BaseRepository<Statut>
     {
-        /*public static bool Add(string name, string description)
+        public override bool Create(Statut element)
         {
-            //register //check if != null
+            throw new NotImplementedException();
+        }
 
-            Statut statut = new Statut()
-            {
-                Name = name
-            };
+        public override List<Statut> FindAll()
+        {
+            throw new NotImplementedException();
+        }
 
-            Netflix.dataContext.Statuts.Add(statut);
-            return Netflix.Save();
-        }*/
+        public override List<Statut> FindAllBy(Predicate<Statut> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Statut FindBy(Predicate<Statut> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Statut FindById(int id)
+        {
+            return Netflix.dataContext.Statut.Find(id);
+        }
+
+        public override bool Remove(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Update(Statut element)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

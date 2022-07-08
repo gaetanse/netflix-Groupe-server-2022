@@ -1,4 +1,5 @@
-﻿using NetflixServer.Classes;
+﻿using BankEntityFrameWork.Repositories;
+using NetflixServer.Classes;
 using netflixTestConsole.database.classes;
 using System;
 using System.Collections.Generic;
@@ -8,26 +9,41 @@ using System.Threading.Tasks;
 
 namespace netflixTestConsole.database
 {
-    public class RessourceRepo
+    public class RessourceRepo : BaseRepository<Ressource>
     {
-        /*public static bool Add(string title, int categoryId, List<Tag>tags, string description, string content, string trailer, int nbEpisodes, int nbSaisons)
+        public override bool Create(Ressource element)
         {
-            //register //check if != null
+            throw new NotImplementedException();
+        }
 
-            Ressource ressource = new Ressource()
-            {
-                Title = title,
-                CategoryId = categoryId,
-                Tags = tags,
-                Description = description,
-                Content = content,
-                Trailer = trailer,
-                NbEpisodes = nbEpisodes,
-                NbSaisons = nbSaisons
-            };
+        public override List<Ressource> FindAll()
+        {
+            throw new NotImplementedException();
+        }
 
-            Netflix.dataContext.Ressources.Add(ressource);
-            return Netflix.Save();
-        }*/
+        public override List<Ressource> FindAllBy(Predicate<Ressource> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Ressource FindBy(Predicate<Ressource> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Ressource FindById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Remove(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Update(Ressource element)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

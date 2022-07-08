@@ -1,4 +1,5 @@
-﻿using NetflixServer.Classes;
+﻿using BankEntityFrameWork.Repositories;
+using NetflixServer.Classes;
 using netflixTestConsole.database.classes;
 using System;
 using System.Collections.Generic;
@@ -8,20 +9,41 @@ using System.Threading.Tasks;
 
 namespace netflixTestConsole.database
 {
-    public class CategoryRepo
+    public class CategoryRepo : BaseRepository<Category>
     {
-        /*public static bool Add(string name, string description)
+        public override bool Create(Category element)
         {
-            //register //check if != null
+            throw new NotImplementedException();
+        }
 
-            Category faq = new Category()
-            {
-                Name = name,
-                Description = description
-            };
+        public override List<Category> FindAll()
+        {
+            throw new NotImplementedException();
+        }
 
-            Netflix.dataContext.Categorys.Add(faq);
-            return Netflix.Save();
-        }*/
+        public override List<Category> FindAllBy(Predicate<Category> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Category FindBy(Predicate<Category> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Category FindById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Remove(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Update(Category element)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

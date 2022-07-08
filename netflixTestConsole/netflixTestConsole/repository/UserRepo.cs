@@ -63,14 +63,6 @@ namespace ConsoleApp2.database
             return users;
         }
 
-        public static bool Remove(int id)
-        {
-            //remove a user with a id
-            Netflix.dataContext.Remove(Netflix.dataContext.Users.Single(a => a.Id == id));
-            if (Netflix.dataContext.SaveChanges() != 0) return true;
-            return false;
-        }
-
         public override bool Create(User element)
         {
             Netflix.dataContext.Users.Add(element);
@@ -82,12 +74,28 @@ namespace ConsoleApp2.database
             throw new NotImplementedException();
         }
 
-        public override User Find(Predicate<User> predicate)
+        public override List<User> FindAllBy(Predicate<User> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public override List<User> FindAll(Predicate<User> predicate)
+        public override bool Remove(int id)
+        {
+            Netflix.dataContext.Remove(Netflix.dataContext.Users.Single(a => a.Id == id));
+            return Netflix.Save();
+        }
+
+        public override User FindById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override User FindBy(Predicate<User> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<User> FindAll()
         {
             throw new NotImplementedException();
         }
