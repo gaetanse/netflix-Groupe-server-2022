@@ -1,5 +1,7 @@
-﻿using System;
+﻿using netflixTestConsole.classes;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -10,7 +12,7 @@ namespace netflixTestConsole.database.classes
     [Table("statut")]
     public class Statut
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        [Required] public int Id { get; set; }
+        [StringLength(Constants.statutNameSize)] [Required] public string Name { get; set; }
     }
 }

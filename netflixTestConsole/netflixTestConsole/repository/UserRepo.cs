@@ -11,22 +11,6 @@ namespace ConsoleApp2.database
 {
     public class UserRepo : BaseRepository<User>
     {
-        public static bool Add(string lastName, string firstName, int statutId, string mail, string password)
-        {
-            //register //check if != null
-
-            User user = new User()
-            {
-                LastName = lastName,
-                FirstName = firstName,
-                StatutId = statutId,
-                Mail = mail,
-                Password = password
-            };
-
-            Netflix.dataContext.Users.Add(user);
-            return Netflix.Save();
-        }
 
         public static bool Login(string mail, string password)
         {

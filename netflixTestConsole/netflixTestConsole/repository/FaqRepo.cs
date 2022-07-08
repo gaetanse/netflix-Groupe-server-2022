@@ -1,32 +1,30 @@
-﻿using NetflixServer.Classes;
+﻿using BankEntityFrameWork.Repositories;
+using NetflixServer.Classes;
 using netflixTestConsole.database.classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp2.database
 {
-    public static class FaqRepo
+    public class FaqRepo : BaseRepository<Faq>
     {
-        /*public static bool Add(string question, string response)
+        public override bool Create(Faq element)
         {
-            //register //check if != null
-
-            Faq faq = new Faq()
-            {
-                Question = question,
-                Response = response
-            };
-
-            Netflix.dataContext.Faqs.Add(faq);
+            Netflix.dataContext.Faqs.Add(element);
             return Netflix.Save();
         }
-        public static Faq GetById(int id)
+
+        public override Faq Find(Predicate<Faq> predicate)
         {
-            //get user with a id
-            return Netflix.dataContext.Faqs.Find(id);
-        }*/
+            throw new NotImplementedException();
+        }
+
+        public override List<Faq> FindAll(Predicate<Faq> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Update(Faq element)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

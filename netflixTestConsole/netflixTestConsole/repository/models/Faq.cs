@@ -7,7 +7,7 @@ namespace netflixTestConsole.database.classes
     [Table("faq")]
     public class Faq
     {
-        public int Id { get; set; }
+        [Required] public int Id { get; set; }
         [StringLength(Constants.faqQuestionSize)] [Required] public string Question { get; set; }
         [StringLength(Constants.faqResponseSize)] [Required] public string Response { get; set; }
     }

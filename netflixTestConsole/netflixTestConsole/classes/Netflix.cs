@@ -9,11 +9,15 @@ namespace NetflixServer.Classes
     {
         public static DataContext dataContext;
         public static UserRepo UserRepo { get; set; }
+        public static FaqRepo FaqRepo { get; set; }
+        public static ImageDataRepo ImageDataRepo { get; set; }
         public static void StartApp()
         {
             dataContext = new DataContext();
             Constants.Create();
             UserRepo = new UserRepo();
+            FaqRepo = new FaqRepo();
+            ImageDataRepo = new ImageDataRepo();
         }
 
         public static bool Save()

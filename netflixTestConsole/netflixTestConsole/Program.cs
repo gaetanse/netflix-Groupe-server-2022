@@ -30,6 +30,34 @@ namespace NetflixServer
                 Console.WriteLine("user cannot be create");
             }
 
+            Faq faq = new Faq() { 
+                Question = "la question", 
+                Response = "La reponse" 
+            };
+
+            if (Netflix.FaqRepo.Create(faq))
+            {
+                Console.WriteLine("faq create");
+            }
+            else
+            {
+                Console.WriteLine("faq cannot be create");
+            }
+
+            ImageData imageData = new ImageData()
+            {
+                //remplir
+            };
+
+            if (Netflix.ImageDataRepo.Create(imageData))
+            {
+                Console.WriteLine("imageData create");
+            }
+            else
+            {
+                Console.WriteLine("imageData cannot be create");
+            }
+
             /*UserRepo.Add("lastName","firstName",0,"test@gmail.com","123");
             UserRepo.Add("lastName", "firstName", 0, "test@gmail.com", "123");
             UserRepo.Add("lastName", "firstName", 0, "test@gmail.com", "123");

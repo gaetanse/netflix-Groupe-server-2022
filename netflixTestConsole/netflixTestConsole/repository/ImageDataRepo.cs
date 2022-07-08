@@ -1,4 +1,5 @@
-﻿using NetflixServer.Classes;
+﻿using BankEntityFrameWork.Repositories;
+using NetflixServer.Classes;
 using netflixTestConsole.database.classes;
 using System;
 using System.Collections.Generic;
@@ -9,21 +10,27 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace netflixTestConsole.database
 {
-    public class ImageDataRepo
+    public class ImageDataRepo : BaseRepository<ImageData>
     {
-        /*public static bool Add(string url, string type, int ressourceId)
+        public override bool Create(ImageData element)
         {
-            //register //check if != null
-
-            ImageData image = new ImageData()
-            {
-                Url = url,
-                Type = type,
-                RessourceId = ressourceId
-            };
-
-            Netflix.dataContext.Images.Add(image);
+            Netflix.dataContext.ImageDatas.Add(element);
             return Netflix.Save();
-        }*/
+        }
+
+        public override ImageData Find(Predicate<ImageData> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<ImageData> FindAll(Predicate<ImageData> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Update(ImageData element)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

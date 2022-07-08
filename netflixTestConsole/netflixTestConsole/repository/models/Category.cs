@@ -7,7 +7,7 @@ namespace netflixTestConsole.database.classes
     [Table("category")]
     public class Category
     {
-        public int Id { get; set; }
+        [Required] public int Id { get; set; }
         [StringLength(Constants.categoryNameSize)] [Required] public string Name { get; set; }
         [StringLength(Constants.categoryDescriptionSize)] [Required] public string Description { get; set; }
     }

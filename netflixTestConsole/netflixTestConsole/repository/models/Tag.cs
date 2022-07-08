@@ -1,0 +1,19 @@
+﻿using netflixTestConsole.classes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace netflixTestConsole.database.classes
+{
+    [Table("tag")]
+    public class Tag
+    {
+        [Required] public int Id { get; set; }
+        [StringLength(Constants.tagNameSize)] [Required] public string Name { get; set; }
+        [StringLength(Constants.tagDescriptionSize)] [Required] public string Description { get; set; }
+    }
+}
