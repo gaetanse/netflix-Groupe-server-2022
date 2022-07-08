@@ -1,4 +1,5 @@
-﻿using NetflixServer.Classes;
+﻿using BankEntityFrameWork.Repositories;
+using NetflixServer.Classes;
 using netflixTestConsole.database.classes;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2.database
 {
-    public static class UserDb
+    public class UserRepo : BaseRepository<User>
     {
         public static bool Add(string lastName, string firstName, int statutId, string mail, string password)
         {
@@ -84,6 +85,27 @@ namespace ConsoleApp2.database
             Netflix.dataContext.Remove(Netflix.dataContext.Users.Single(a => a.Id == id));
             if (Netflix.dataContext.SaveChanges() != 0) return true;
             return false;
+        }
+
+        public override bool Create(User element)
+        {
+            Netflix.dataContext.Users.Add(element);
+            return Netflix.Save();
+        }
+
+        public override bool Update(User element)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override User Find(Predicate<User> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<User> FindAll(Predicate<User> predicate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

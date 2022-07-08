@@ -1,14 +1,19 @@
+using ConsoleApp2.database;
 using CoursEntityFrameWorkCore;
+using netflixTestConsole.classes;
+using netflixTestConsole.database;
 
 namespace NetflixServer.Classes
 {
-    public class Netflix
+    public static class Netflix
     {
         public static DataContext dataContext;
-
-        public Netflix()
+        public static UserRepo UserRepo { get; set; }
+        public static void StartApp()
         {
             dataContext = new DataContext();
+            Constants.Create();
+            UserRepo = new UserRepo();
         }
 
         public static bool Save()

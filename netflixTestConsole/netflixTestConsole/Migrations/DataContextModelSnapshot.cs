@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ConsoleApp2.Migrations
+namespace netflixTestConsole.Migrations
 {
     [DbContext(typeof(DataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot
@@ -21,7 +21,7 @@ namespace ConsoleApp2.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("ConsoleApp2.classes.Faq", b =>
+            modelBuilder.Entity("netflixTestConsole.database.classes.Statut", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -29,20 +29,16 @@ namespace ConsoleApp2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Question")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Response")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Faqs");
+                    b.ToTable("statut");
                 });
 
-            modelBuilder.Entity("NetflixServerConsoleTest.classes.User", b =>
+            modelBuilder.Entity("netflixTestConsole.database.classes.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -62,16 +58,30 @@ namespace ConsoleApp2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NumberStatut")
-                        .HasColumnType("int");
-
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("StatutId")
+                        .HasColumnType("int")
+                        .HasColumnName("statut_id");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.HasIndex("StatutId");
+
+                    b.ToTable("user");
+                });
+
+            modelBuilder.Entity("netflixTestConsole.database.classes.User", b =>
+                {
+                    b.HasOne("netflixTestConsole.database.classes.Statut", "Statut")
+                        .WithMany()
+                        .HasForeignKey("StatutId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Statut");
                 });
 #pragma warning restore 612, 618
         }

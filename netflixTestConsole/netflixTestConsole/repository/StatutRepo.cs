@@ -8,20 +8,19 @@ using System.Threading.Tasks;
 
 namespace netflixTestConsole.database
 {
-    public class CategoryDb
+    public class StatutRepo
     {
-        public static bool Add(string name, string description)
+        /*public static bool Add(string name, string description)
         {
             //register //check if != null
 
-            Category faq = new Category()
+            Statut statut = new Statut()
             {
-                Name = name,
-                Description = description
+                Name = name
             };
 
-            Netflix.dataContext.Categorys.Add(faq);
+            Netflix.dataContext.Statuts.Add(statut);
             return Netflix.Save();
-        }
+        }*/
     }
 }

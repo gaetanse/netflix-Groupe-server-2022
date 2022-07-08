@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2.database
 {
-    public static class FaqDb
+    public static class FaqRepo
     {
-        public static bool Add(string question, string response)
+        /*public static bool Add(string question, string response)
         {
             //register //check if != null
 
@@ -27,6 +27,6 @@ namespace ConsoleApp2.database
         {
             //get user with a id
             return Netflix.dataContext.Faqs.Find(id);
-        }
+        }*/
     }
 }

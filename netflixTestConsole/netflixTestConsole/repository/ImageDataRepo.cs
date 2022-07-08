@@ -5,23 +5,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace netflixTestConsole.database
 {
-    public class TagDb
+    public class ImageDataRepo
     {
-        public static bool Add(string name, string description)
+        /*public static bool Add(string url, string type, int ressourceId)
         {
             //register //check if != null
 
-            Tag faq = new Tag()
+            ImageData image = new ImageData()
             {
-                Name = name,
-                Description = description
+                Url = url,
+                Type = type,
+                RessourceId = ressourceId
             };
 
-            Netflix.dataContext.Tags.Add(faq);
+            Netflix.dataContext.Images.Add(image);
             return Netflix.Save();
-        }
+        }*/
     }
 }

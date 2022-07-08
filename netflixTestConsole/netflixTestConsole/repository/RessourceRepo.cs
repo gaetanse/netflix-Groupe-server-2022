@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace netflixTestConsole.database
 {
-    public class RessourceDb
+    public class RessourceRepo
     {
-        public static bool Add(string title, int categoryId, List<Tag>tags, string description, string content, string trailer, int nbEpisodes, int nbSaisons)
+        /*public static bool Add(string title, int categoryId, List<Tag>tags, string description, string content, string trailer, int nbEpisodes, int nbSaisons)
         {
             //register //check if != null
 
@@ -28,6 +28,6 @@ namespace netflixTestConsole.database
 
             Netflix.dataContext.Ressources.Add(ressource);
             return Netflix.Save();
-        }
+        }*/
     }
 }
