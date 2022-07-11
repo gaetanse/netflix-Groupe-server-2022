@@ -22,9 +22,9 @@ namespace ConsoleApp2.database
             return Netflix.dataContext.Faqs.Find(id);
         }
 
-        public override bool Remove(int id)
+        public override bool Remove(Faq faq)
         {
-            Netflix.dataContext.Remove(Netflix.dataContext.Faqs.Single(a => a.Id == id));
+            Netflix.dataContext.Faqs.Remove(faq);
             return Netflix.Save();
         }
     }

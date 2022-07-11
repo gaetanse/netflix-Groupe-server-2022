@@ -28,9 +28,9 @@ namespace netflixTestConsole.database
             return Netflix.dataContext.Ressources.Find(id);
         }
 
-        public override bool Remove(int id)
+        public override bool Remove(Ressource ressource)
         {
-            Netflix.dataContext.Remove(Netflix.dataContext.Ressources.Single(a => a.Id == id));
+            Netflix.dataContext.Ressources.Remove(ressource);
             return Netflix.Save();
         }
     }

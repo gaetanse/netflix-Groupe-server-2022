@@ -13,7 +13,8 @@ namespace netflixTestConsole.database
     {
         public override bool Create(Statut element)
         {
-            throw new NotImplementedException();
+            Netflix.dataContext.Statuts.Add(element);
+            return Netflix.Save();
         }
 
         public override List<Statut> FindAll()
@@ -26,9 +27,9 @@ namespace netflixTestConsole.database
             return Netflix.dataContext.Statuts.Find(id);
         }
 
-        public override bool Remove(int id)
+        public override bool Remove(Statut statut)
         {
-            Netflix.dataContext.Remove(Netflix.dataContext.Statuts.Single(a => a.Id == id));
+            Netflix.dataContext.Statuts.Remove(statut);
             return Netflix.Save();
         }
     }

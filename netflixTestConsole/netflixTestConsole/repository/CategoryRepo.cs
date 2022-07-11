@@ -13,7 +13,8 @@ namespace netflixTestConsole.database
     {
         public override bool Create(Category element)
         {
-            throw new NotImplementedException();
+            Netflix.dataContext.Categorys.Add(element);
+            return Netflix.Save();
         }
 
         public override List<Category> FindAll()
@@ -26,9 +27,9 @@ namespace netflixTestConsole.database
             return Netflix.dataContext.Categorys.Find(id);
         }
 
-        public override bool Remove(int id)
+        public override bool Remove(Category category)
         {
-            Netflix.dataContext.Remove(Netflix.dataContext.Categorys.Single(a => a.Id == id));
+            Netflix.dataContext.Categorys.Remove(category);
             return Netflix.Save();
         }
     }
