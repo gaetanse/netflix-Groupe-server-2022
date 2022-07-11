@@ -18,8 +18,8 @@ namespace NetflixServer
 
             if (Netflix.UserRepo.Create(new()
             {
-                LastName = "test",
-                FirstName = "test",
+                LastName = "jetaicreer",
+                FirstName = "fisrtnameaaaaaaa",
                 StatutId = statutUser.Id,
                 Statut = statutUser,
                 Mail = "test@gmail.com",
@@ -32,7 +32,15 @@ namespace NetflixServer
                 Console.WriteLine("user cannot be create");
             }
 
-            Console.WriteLine("user 1 : "+Netflix.UserRepo.FindById(1).Statut.Name);
+            /*if (Netflix.UserRepo.Remove(8)){
+                Console.WriteLine("suppression ok");
+            }
+            else
+            {
+                Console.WriteLine("suppression pas ok");
+            }*/
+
+            /*Console.WriteLine("user 1 : "+Netflix.UserRepo.FindById(1).Statut.Name);
 
             if (Netflix.UserRepo.Create(new()
             {
@@ -66,7 +74,7 @@ namespace NetflixServer
             else
             {
                 Console.WriteLine("creator cannot be create");
-            }
+            }*/
 
             Faq faq = new() { 
                 Question = "la question", 

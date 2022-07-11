@@ -53,17 +53,24 @@ namespace ConsoleApp2.database
         public override bool Create(User element)
         {
             Netflix.dataContext.Users.Add(element);
-            return Netflix.Save();
+            Netflix.dataContext.SaveChanges();
+            return true;
+            //return Netflix.Save();
         }
 
         public override bool Remove(int id)
         {
-            Netflix.dataContext.Remove(Netflix.dataContext.Users.Single(a => a.Id == id));
+            User user = FindById(id);
+            //Console.WriteLine(user.Id);
+            if (user != null)
+            {
+                Netflix.dataContext.Users.Remove(user);
+            }
             return Netflix.Save();
         }
         public override User FindById(int id)
         {
-            return Netflix.dataContext.Users.Include(u => u.Statut).Where(x => x.Id == id).First();
+            return Netflix.dataContext.Users.Find(id);
         }
 
         public override List<User> FindAll()
