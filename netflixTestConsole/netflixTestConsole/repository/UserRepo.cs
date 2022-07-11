@@ -13,10 +13,9 @@ namespace ConsoleApp2.database
     public class UserRepo : BaseRepository<User>
     {
 
-        public static bool Login(string mail, string password)
+        public User Login(string mail, string password)
         {
-            //login with sha256
-            return false;
+            return Netflix.dataContext.Users.Include(user => user.Statut).FirstOrDefault(user => user.Mail == mail && user.Password == password);
         }
 
         public static bool BanUser(int id, bool newBan)
@@ -62,7 +61,6 @@ namespace ConsoleApp2.database
             Netflix.dataContext.Remove(Netflix.dataContext.Users.Single(a => a.Id == id));
             return Netflix.Save();
         }
-
         public override User FindById(int id)
         {
             return Netflix.dataContext.Users.Include(u => u.Statut).Where(x => x.Id == id).First();
