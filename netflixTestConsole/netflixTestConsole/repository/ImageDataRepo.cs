@@ -30,9 +30,9 @@ namespace netflixTestConsole.database
             return Netflix.dataContext.ImageDatas.Find(id);
         }
 
-        public override bool Remove(int id)
+        public override bool Remove(ImageData imageData)
         {
-            Netflix.dataContext.Remove(Netflix.dataContext.ImageDatas.Single(a => a.Id == id));
+            Netflix.dataContext.ImageDatas.Remove(imageData);
             return Netflix.Save();
         }
     }

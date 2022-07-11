@@ -16,7 +16,11 @@ namespace NetflixServer
             Statut statutAdmin = Netflix.StatutRepo.FindById(Constants.statutAdminNumber);
             Statut statutCreator = Netflix.StatutRepo.FindById(Constants.statutCreatorNumber);
 
-            if (Netflix.UserRepo.Create(new()
+            User user = Netflix.UserRepo.FindById(2);
+
+            //Netflix.UserRepo.Remove();
+
+            /*if (Netflix.UserRepo.Create(new()
             {
                 LastName = "jetaicreer",
                 FirstName = "fisrtnameaaaaaaa",

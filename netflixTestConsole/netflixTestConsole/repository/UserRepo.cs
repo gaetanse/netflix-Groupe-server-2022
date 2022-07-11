@@ -58,14 +58,9 @@ namespace ConsoleApp2.database
             //return Netflix.Save();
         }
 
-        public override bool Remove(int id)
+        public override bool Remove(User user)
         {
-            User user = FindById(id);
-            //Console.WriteLine(user.Id);
-            if (user != null)
-            {
-                Netflix.dataContext.Users.Remove(user);
-            }
+            Netflix.dataContext.Users.Remove(user);
             return Netflix.Save();
         }
         public override User FindById(int id)
@@ -75,6 +70,7 @@ namespace ConsoleApp2.database
 
         public override List<User> FindAll()
         {
+            //verifier
             return Netflix.dataContext.Users.Include(u => u.Statut).ToList();
         }
     }
