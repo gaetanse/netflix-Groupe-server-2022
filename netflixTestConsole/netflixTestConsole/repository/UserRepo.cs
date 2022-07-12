@@ -53,7 +53,9 @@ namespace ConsoleApp2.database
         public override bool Create(User element)
         {
             Netflix.dataContext.Users.Add(element);
-            return Netflix.Save();
+            Netflix.dataContext.SaveChanges();
+            return true;
+            //return Netflix.Save();
         }
 
         public override bool Remove(User user)
