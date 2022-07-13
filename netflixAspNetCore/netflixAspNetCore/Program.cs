@@ -1,8 +1,16 @@
 using NetflixServer.Classes;
+using netflixTestConsole.database.classes;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+{
+    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+}));
+
 var app = builder.Build();
 
+app.UseCors("MyPolicy");
 /*
  * 
  * int	{id:int}	123456789, -123456789	Correspond à n’importe quel entier
@@ -32,12 +40,23 @@ app.MapGet("/", () =>{ return "Bienvenue sur le serveur"; });
 //user
 app.MapGet("/user/{id:int}", (int id) => { return Netflix.UserRepo.FindById(id); });
 app.MapGet("/users", () =>{ return Netflix.UserRepo.FindAll(); });
+app.MapGet("/login", (string mail, string password) => { 
+    return Netflix.UserRepo.Login(mail,password); 
+});
 //ressource
 //app.MapGet("/ressource/{id:int}", (int id) => { return Netflix.RessourceRepo.FindById(id); });
 app.MapGet("/ressources", () => { return Netflix.RessourceRepo.FindAll(); });
 //faq
 //app.MapGet("/faq/{id:int}", (int id) => { return Netflix.FaqRepo.FindById(id); });
 app.MapGet("/faqs", () => { return Netflix.FaqRepo.FindAll(); });
+//save user avatar
+app.MapGet("/user/avatar", (int id, string avatar) => {
+    User user = Netflix.UserRepo.FindById(id);
+    if(user != null)
+    {
+        Console.WriteLine(avatar);  
+    }
+});
 
 Netflix.StartApp();
 
