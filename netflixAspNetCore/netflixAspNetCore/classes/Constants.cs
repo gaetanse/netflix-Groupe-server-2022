@@ -34,6 +34,7 @@ namespace netflixTestConsole.classes
 
         public const ushort userLastNameSize = 50;
         public const ushort userFirstNameSize = 50;
+        public const ushort userAvatarSize = 500;
         public const ushort userMailSize = 200;
         public const ushort userPasswordSize = 200;
     }

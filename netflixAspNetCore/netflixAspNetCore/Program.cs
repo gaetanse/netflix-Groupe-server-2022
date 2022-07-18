@@ -1,5 +1,7 @@
 using NetflixServer.Classes;
 using netflixTestConsole.database.classes;
+using Newtonsoft.Json.Linq;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +10,11 @@ builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
     builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
 }));
 
+builder.Services.AddMvc();
+
 var app = builder.Build();
+
+app.UseStaticFiles();
 
 app.UseCors("MyPolicy");
 /*
@@ -43,6 +49,22 @@ app.MapGet("/users", () =>{ return Netflix.UserRepo.FindAll(); });
 app.MapGet("/login", (string mail, string password) => { 
     return Netflix.UserRepo.Login(mail,password); 
 });
+//remove this
+app.MapGet("/createUser", () => {
+
+    Statut statut = Netflix.StatutRepo.FindById(1);
+    Netflix.UserRepo.Create(new User()
+    {
+        FirstName = "test",
+        LastName = "test",
+        StatutId = 1,
+        Avatar = "",
+        Statut = statut,
+        Mail = "123@gmail.com",
+        Password = "123"
+    });
+
+});
 //ressource
 //app.MapGet("/ressource/{id:int}", (int id) => { return Netflix.RessourceRepo.FindById(id); });
 app.MapGet("/ressources", () => { return Netflix.RessourceRepo.FindAll(); });
@@ -52,12 +74,17 @@ app.MapGet("/faqs", () => { return Netflix.FaqRepo.FindAll(); });
 //save user avatar
 app.MapGet("/user/avatar", (int id, string avatar) => {
     User user = Netflix.UserRepo.FindById(id);
-    if(user != null)
+    Console.WriteLine(avatar);
+    //statut vide ???
+    if (user != null)
     {
+        user.Avatar = avatar;
         Console.WriteLine(avatar);  
     }
 });
 
 Netflix.StartApp();
+
+app.MapControllerRoute("avatar", "avatar", new { controller = "Avatar", action = "Index" });
 
 app.Run();
