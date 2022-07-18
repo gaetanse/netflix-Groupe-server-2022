@@ -4,7 +4,7 @@ namespace netflixAspNetCore.Controllers
 {
     public class RessourceController : Controller
     {
-        [HttpPost("avatar")]
+        [HttpPost("ressource")]
         public bool Index([FromForm] IFormFile file)
         {
             string name = file.FileName;

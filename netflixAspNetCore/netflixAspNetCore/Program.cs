@@ -3,20 +3,58 @@ using netflixTestConsole.database.classes;
 using Newtonsoft.Json.Linq;
 using System.Text.Json;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+builder.Services.AddCors(options =>
 {
-    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-}));
+    options.AddPolicy(MyAllowSpecificOrigins,
+                          policy =>
+                          {
+                              policy.WithOrigins("http://localhost:3000", "http://localhost:7119");
+                              policy.AllowAnyHeader();
+                              policy.AllowAnyMethod();
+                              policy.AllowCredentials();
+                          });
+});
 
 builder.Services.AddMvc();
 
 var app = builder.Build();
 
-app.UseStaticFiles();
+//app.UseHttpsRedirection();
 
-app.UseCors("MyPolicy");
+
+
+
+app.UseCors(MyAllowSpecificOrigins);
+app.UseStaticFiles();
+app.UseRouting();
+
+//app.UseAuthorization();
+
+//app.MapControllers();
+
+//app.UseCors("CorsPolicy");
+
+//app.UseStaticFiles();
+
+/*app.UseStaticFiles(new StaticFileOptions
+{
+    ServeUnknownFileTypes = true,
+    OnPrepareResponse = (ctx) =>
+    {
+        var policy = corsPolicyProvider.GetPolicyAsync(ctx.Context, "CorsPolicy")
+            .ConfigureAwait(false)
+            .GetAwaiter().GetResult();
+
+        var corsResult = corsService.EvaluatePolicy(ctx.Context, policy);
+
+        corsService.ApplyResult(corsResult, ctx.Context.Response);
+    }
+});*/
+
 /*
  * 
  * int	{id:int}	123456789, -123456789	Correspond à n’importe quel entier
@@ -72,15 +110,18 @@ app.MapGet("/ressources", () => { return Netflix.RessourceRepo.FindAll(); });
 //app.MapGet("/faq/{id:int}", (int id) => { return Netflix.FaqRepo.FindById(id); });
 app.MapGet("/faqs", () => { return Netflix.FaqRepo.FindAll(); });
 //save user avatar
-app.MapGet("/user/avatar", (int id, string avatar) => {
+app.MapGet("/user/setavatar", (int id, string avatar) => {
     User user = Netflix.UserRepo.FindById(id);
     Console.WriteLine(avatar);
     //statut vide ???
     if (user != null)
     {
         user.Avatar = avatar;
-        Console.WriteLine(avatar);  
+        Console.WriteLine(avatar);
+        Netflix.Save();
+        return user;
     }
+    return null;
 });
 
 Netflix.StartApp();
