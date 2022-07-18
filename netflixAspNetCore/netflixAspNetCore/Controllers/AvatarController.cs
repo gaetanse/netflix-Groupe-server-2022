@@ -6,28 +6,24 @@ namespace netflixAspNetCore.Controllers
 {
     public class AvatarController : Controller
     {
+
+        private IWebHostEnvironment _env;
+
+        public AvatarController(IWebHostEnvironment env)
+        {
+            _env = env;
+        }
+
         [HttpPost("avatar")]
-        public bool Index([FromForm] IFormFile file, [FromForm] IFormFile id)
+        public bool Index([FromForm] IFormFile file)
         {
             if (file != null)
             {
-                string name = file.FileName;
-                using (var memoryStream = new MemoryStream())
-                {
-                    file.CopyTo(memoryStream);
-                    FileStream fileStream = new FileStream("wwwroot/Assets/Avatars/" + name, FileMode.Create, FileAccess.Write);
-                    fileStream.Write(memoryStream.ToArray());
-                    fileStream.Dispose();
-                    
-                    /*User user = Netflix.UserRepo.FindById(id);
-                    if (user != null)
-                    {
-                        user.Avatar = name;
-                        Console.WriteLine(name);
-                        Netflix.Save();
-                    }*/
-                    return true;
-                }
+                string path = Path.Combine(_env.WebRootPath,"Assets/Avatars", file.FileName);
+                Stream stream = new FileStream(path, FileMode.Create);
+                file.CopyTo(stream);
+                stream.Close();
+                return true;
             }
             return false;
         }
