@@ -9,8 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(MyAllowSpecificOrigins,
-                          policy =>
+    options.AddPolicy(MyAllowSpecificOrigins,policy =>
                           {
                               policy.WithOrigins("http://localhost:3000", "http://localhost:7119");
                               policy.AllowAnyHeader();
@@ -20,40 +19,19 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddMvc();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromDays(30);
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
-//app.UseHttpsRedirection();
-
-
-
-
+app.UseSession();
 app.UseCors(MyAllowSpecificOrigins);
 app.UseStaticFiles();
 app.UseRouting();
-
-//app.UseAuthorization();
-
-//app.MapControllers();
-
-//app.UseCors("CorsPolicy");
-
-//app.UseStaticFiles();
-
-/*app.UseStaticFiles(new StaticFileOptions
-{
-    ServeUnknownFileTypes = true,
-    OnPrepareResponse = (ctx) =>
-    {
-        var policy = corsPolicyProvider.GetPolicyAsync(ctx.Context, "CorsPolicy")
-            .ConfigureAwait(false)
-            .GetAwaiter().GetResult();
-
-        var corsResult = corsService.EvaluatePolicy(ctx.Context, policy);
-
-        corsService.ApplyResult(corsResult, ctx.Context.Response);
-    }
-});*/
 
 /*
  * 
@@ -78,15 +56,18 @@ required	{name:required}	Rick	Utilisé pour garantir qu’une valeur autre qu’un pa
  * 
  * */
 
-//contraintes de routes
-
 app.MapGet("/", () =>{ return "Bienvenue sur le serveur"; });
 //user
 app.MapGet("/user/{id:int}", (int id) => { return Netflix.UserRepo.FindById(id); });
 app.MapGet("/users", () =>{ return Netflix.UserRepo.FindAll(); });
-app.MapGet("/login", (string mail, string password) => { 
-    return Netflix.UserRepo.Login(mail,password); 
-});
+/*app.MapGet("/login", (string mail, string password) => {
+    User user = Netflix.UserRepo.Login(mail, password);
+    if(user != null)
+    {
+        HttpContext.Session.SetString("isLogin", "true");
+    }
+    return user;
+});*/
 //remove this
 app.MapGet("/createUser", () => {
 
@@ -127,5 +108,7 @@ app.MapGet("/user/setavatar", (int id, string avatar) => {
 Netflix.StartApp();
 
 app.MapControllerRoute("avatar", "avatar", new { controller = "Avatar", action = "Index" });
+app.MapControllerRoute("isLogin", "isLogin", new { controller = "IsLogin", action = "Index" });
+app.MapControllerRoute("login", "login", new { controller = "Login", action = "Index" });
 
 app.Run();
