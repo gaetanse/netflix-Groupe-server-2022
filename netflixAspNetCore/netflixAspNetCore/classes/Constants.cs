@@ -28,6 +28,7 @@ namespace netflixTestConsole.classes
         public const ushort ressourceTrailerSize = 200;
 
         public const ushort statutNameSize = 200;
+        public const ushort statutDescriptionSize = 200;
 
         public const ushort tagNameSize = 50;
         public const ushort tagDescriptionSize = 200;

@@ -4,7 +4,7 @@
 
 namespace netflixAspNetCore.Migrations
 {
-    public partial class migration10 : Migration
+    public partial class migration50 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,11 +42,31 @@ namespace netflixAspNetCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
+                    StatutId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_statut", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "user",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Avatar = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Mail = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_user", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -71,30 +91,6 @@ namespace netflixAspNetCore.Migrations
                         name: "FK_ressource_category_category_id",
                         column: x => x.category_id,
                         principalTable: "category",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "user",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Avatar = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    statut_id = table.Column<int>(type: "int", nullable: false),
-                    Mail = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_user", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_user_statut_statut_id",
-                        column: x => x.statut_id,
-                        principalTable: "statut",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -154,11 +150,6 @@ namespace netflixAspNetCore.Migrations
                 name: "IX_tag_TagId",
                 table: "tag",
                 column: "TagId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_user_statut_id",
-                table: "user",
-                column: "statut_id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -170,6 +161,9 @@ namespace netflixAspNetCore.Migrations
                 name: "imageData");
 
             migrationBuilder.DropTable(
+                name: "statut");
+
+            migrationBuilder.DropTable(
                 name: "tag");
 
             migrationBuilder.DropTable(
@@ -177,9 +171,6 @@ namespace netflixAspNetCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "ressource");
-
-            migrationBuilder.DropTable(
-                name: "statut");
 
             migrationBuilder.DropTable(
                 name: "category");

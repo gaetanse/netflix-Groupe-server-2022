@@ -13,6 +13,9 @@ namespace netflixTestConsole.database.classes
     public class Statut
     {
         [Required] public int Id { get; set; }
+        [Required] public int StatutId { get; set; }
+        [Required] public int UserId { get; set; }
         [StringLength(Constants.statutNameSize)] [Required] public string Name { get; set; }
+        [StringLength(Constants.statutDescriptionSize)] [Required] public string Description { get; set; }
     }
 }

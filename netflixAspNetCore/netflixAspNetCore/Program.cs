@@ -71,18 +71,28 @@ app.MapGet("/users", () =>{ return Netflix.UserRepo.FindAll(); });
 //remove this
 app.MapGet("/createUser", () => {
 
-    Statut statut = Netflix.StatutRepo.FindById(1);
     Netflix.UserRepo.Create(new User()
     {
         FirstName = "test",
         LastName = "test",
-        StatutId = 1,
         Avatar = "",
-        Statut = statut,
         Mail = "123@gmail.com",
         Password = "123"
     });
+    int userID = Netflix.UserRepo.FindLastUserId();
+    Statut statut = new()
+    {
+        StatutId = 0,
+        UserId = userID,
+        Name = "User",
+        Description = ".............."
+    };
+    Netflix.StatutRepo.Create(statut);
+    return "ok";
 
+});
+app.MapGet("/getUserStatut", (int id) => {
+    return Netflix.StatutRepo.FindByUserId(id);
 });
 //ressource
 //app.MapGet("/ressource/{id:int}", (int id) => { return Netflix.RessourceRepo.FindById(id); });

@@ -15,7 +15,7 @@ namespace ConsoleApp2.database
 
         public User Login(string mail, string password)
         {
-            return Netflix.dataContext.Users.Include(user => user.Statut).FirstOrDefault(user => user.Mail == mail && user.Password == password);
+            return Netflix.dataContext.Users.FirstOrDefault(user => user.Mail == mail && user.Password == password);
         }
 
         public static bool BanUser(int id, bool newBan)
@@ -66,10 +66,15 @@ namespace ConsoleApp2.database
             return Netflix.dataContext.Users.Find(id);
         }
 
+        public int FindLastUserId()
+        {
+            return Netflix.dataContext.Users.Max(user => user.Id);
+        }
+
         public override List<User> FindAll()
         {
             //verifier
-            return Netflix.dataContext.Users.Include(u => u.Statut).ToList();
+            return Netflix.dataContext.Users.ToList();
         }
     }
 }

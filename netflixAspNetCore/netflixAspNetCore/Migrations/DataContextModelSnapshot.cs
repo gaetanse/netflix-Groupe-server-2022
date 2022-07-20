@@ -156,10 +156,21 @@ namespace netflixAspNetCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("StatutId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -227,13 +238,7 @@ namespace netflixAspNetCore.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<int>("StatutId")
-                        .HasColumnType("int")
-                        .HasColumnName("statut_id");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("StatutId");
 
                     b.ToTable("user");
                 });
@@ -265,17 +270,6 @@ namespace netflixAspNetCore.Migrations
                     b.HasOne("netflixTestConsole.database.classes.Ressource", null)
                         .WithMany("Tags")
                         .HasForeignKey("TagId");
-                });
-
-            modelBuilder.Entity("netflixTestConsole.database.classes.User", b =>
-                {
-                    b.HasOne("netflixTestConsole.database.classes.Statut", "Statut")
-                        .WithMany()
-                        .HasForeignKey("StatutId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Statut");
                 });
 
             modelBuilder.Entity("netflixTestConsole.database.classes.Ressource", b =>

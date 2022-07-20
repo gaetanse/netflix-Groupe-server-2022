@@ -27,6 +27,11 @@ namespace netflixTestConsole.database
             return Netflix.dataContext.Statuts.Find(id);
         }
 
+        public Statut FindByUserId(int id)
+        {
+            return Netflix.dataContext.Statuts.FirstOrDefault(statut => statut.UserId == id);
+        }
+
         public override bool Remove(Statut statut)
         {
             Netflix.dataContext.Statuts.Remove(statut);
