@@ -1,11 +1,35 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using netflixAspNetCore.Services;
 using NetflixServer.Classes;
 using netflixTestConsole.database.classes;
 using Newtonsoft.Json.Linq;
+using System.Text;
 using System.Text.Json;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication(a =>
+{
+    a.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    a.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(o =>
+{
+    o.TokenValidationParameters = new TokenValidationParameters()
+    {
+        //changer l'endroit de la chaine
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("bonjour je suis la chaine crypto")),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidIssuer = "m2i",
+        ValidAudience = "m2i"
+    };
+});
+
+builder.Services.AddScoped<TokenService>();
 
 builder.Services.AddCors(options =>
 {
@@ -27,6 +51,9 @@ builder.Services.AddSession(options =>
 });
 
 var app = builder.Build();
+
+app.UseAuthentication(); //utilisation de jwt
+app.UseAuthorization();
 
 app.UseSession();
 app.UseCors(MyAllowSpecificOrigins);
@@ -60,14 +87,6 @@ app.MapGet("/", () =>{ return "Bienvenue sur le serveur"; });
 //user
 app.MapGet("/user/{id:int}", (int id) => { return Netflix.UserRepo.FindById(id); });
 app.MapGet("/users", () =>{ return Netflix.UserRepo.FindAll(); });
-/*app.MapGet("/login", (string mail, string password) => {
-    User user = Netflix.UserRepo.Login(mail, password);
-    if(user != null)
-    {
-        HttpContext.Session.SetString("isLogin", "true");
-    }
-    return user;
-});*/
 //remove this
 app.MapGet("/createUser", () => {
 
@@ -103,12 +122,9 @@ app.MapGet("/faqs", () => { return Netflix.FaqRepo.FindAll(); });
 //save user avatar
 app.MapGet("/user/setavatar", (int id, string avatar) => {
     User user = Netflix.UserRepo.FindById(id);
-    Console.WriteLine(avatar);
-    //statut vide ???
     if (user != null)
     {
         user.Avatar = avatar;
-        Console.WriteLine(avatar);
         Netflix.Save();
         return user;
     }
@@ -117,8 +133,12 @@ app.MapGet("/user/setavatar", (int id, string avatar) => {
 
 Netflix.StartApp();
 
+app.MapControllers();
+
+/*
 app.MapControllerRoute("avatar", "avatar", new { controller = "Avatar", action = "Index" });
 app.MapControllerRoute("isLogin", "isLogin", new { controller = "IsLogin", action = "Index" });
 app.MapControllerRoute("login", "login", new { controller = "Login", action = "Index" });
+*/
 
 app.Run();
