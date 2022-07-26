@@ -14,6 +14,17 @@ namespace netflixAspNetCore.Services
             User user = Netflix.UserRepo.Login(mail, password);
             if (user != null)
             {
+
+                //get statut if role admin if user
+
+                Claim claim = null;
+
+                Statut statut = Netflix.StatutRepo.FindByUserId(user.Id);
+                if (statut != null)
+                {
+                    claim = new Claim("role", statut.Name);
+                }
+
                 JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
                 SecurityTokenDescriptor securityTokenDescriptor = new SecurityTokenDescriptor()
                 {
@@ -23,7 +34,7 @@ namespace netflixAspNetCore.Services
                     Audience = "m2i",
                     Subject = new ClaimsIdentity(new Claim[]
                     {
-                        new Claim("role", "admin")
+                        claim
                     })
                 };
                 SecurityToken token = tokenHandler.CreateToken(securityTokenDescriptor);
