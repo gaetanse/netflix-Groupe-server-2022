@@ -61,21 +61,6 @@ namespace netflixAspNetCore.Controllers
             return NotFound();
         }
 
-        [HttpPatch("setAvatar")]
-        //[Authorize]
-        public IActionResult setAvatar(int id, string avatar)
-        {
-            User user = _baseRepositoryUser.FindById(id);
-            if (user != null)
-            {
-                user.Avatar = avatar;
-                _dataContext.SaveChanges();
-                //return only the avatar of the user
-                return Ok(user);
-            }
-            return NotFound();
-        }
-
         //ajouter get user avec un id
     }
 

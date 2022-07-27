@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using BankEntityFrameWork.Repositories;
+using ConsoleApp2.database;
+using CoursEntityFrameWorkCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using netflixTestConsole.database.classes;
@@ -10,15 +13,17 @@ namespace netflixAspNetCore.Controllers
     [EnableCors("react")]
     public class AvatarApiController : ControllerBase
     {
+        private UserRepo _userRepo;
+        private DataContext _dataContext;
 
         private IWebHostEnvironment _env;
 
-        public AvatarApiController(IWebHostEnvironment env)
+        public AvatarApiController(IWebHostEnvironment env,UserRepo userRepo, DataContext dataContext)
         {
             _env = env;
+            _userRepo = userRepo;
+            _dataContext = dataContext;
         }
-
-        // [AllowAnonymous] permettre d'acceder sans authentification
 
         public class ThingNeedForNowDTO
         {
@@ -28,8 +33,7 @@ namespace netflixAspNetCore.Controllers
 
         [HttpPost]
         [Authorize]
-        //public bool Index([FromForm] IFormFile file)
-        public IActionResult Post([FromForm] IFormFile file)
+        public IActionResult Post([FromForm] IFormFile file, int id, string avatar)
         {
             if (file != null)
             {
@@ -38,26 +42,17 @@ namespace netflixAspNetCore.Controllers
                 Stream stream = new FileStream(path, FileMode.Create);
                 file.CopyTo(stream);
                 stream.Close();
-                return Ok();
+                User user = _userRepo.FindById(id);
+                if (user != null)
+                {
+                    user.Avatar = avatar;
+                    _dataContext.SaveChanges();
+                    //return only the avatar of the user
+                    return Ok(user);
+                }
             }
             return NotFound();
         }
-
-        //adapter en controller
-
-        /*app.MapGet("/user/setavatar", (int id, string avatar) => {
-            User user = Netflix.UserRepo.FindById(id);
-                Console.WriteLine(avatar);
-            //statut vide ???
-            if (user != null)
-            {
-                user.Avatar = avatar;
-                Console.WriteLine(avatar);
-                Netflix.Save();
-                return user;
-            }
-            return null;
-        });*/
     }
 
 }
