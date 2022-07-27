@@ -7,9 +7,16 @@ using Newtonsoft.Json.Linq;
 using System.Text;
 using System.Text.Json;
 
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("react", builder =>
+    {
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
 
 builder.Services.AddAuthentication(a =>
 {
@@ -43,17 +50,6 @@ builder.Services.AddAuthorization(builder =>
 
 builder.Services.AddScoped<TokenService>();
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(MyAllowSpecificOrigins,policy =>
-                          {
-                              policy.WithOrigins("http://localhost:3000", "http://localhost:7119");
-                              policy.AllowAnyHeader();
-                              policy.AllowAnyMethod();
-                              policy.AllowCredentials();
-                          });
-});
-
 builder.Services.AddMvc();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
@@ -68,7 +64,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication(); //utilisation de jwt
 app.UseAuthorization();
-app.UseCors(MyAllowSpecificOrigins);
+app.UseCors();
 app.UseSession();
 
 /*
@@ -131,7 +127,7 @@ app.MapGet("/ressources", () => { return Netflix.RessourceRepo.FindAll(); });
 //app.MapGet("/faq/{id:int}", (int id) => { return Netflix.FaqRepo.FindById(id); });
 app.MapGet("/faqs", () => { return Netflix.FaqRepo.FindAll(); });
 //save user avatar
-app.MapGet("/user/setavatar", (int id, string avatar) => {
+/*app.MapGet("/user/setavatar", (int id, string avatar) => {
     User user = Netflix.UserRepo.FindById(id);
     if (user != null)
     {
@@ -140,7 +136,7 @@ app.MapGet("/user/setavatar", (int id, string avatar) => {
         return user;
     }
     return null;
-});
+});*/
 
 Netflix.StartApp();
 

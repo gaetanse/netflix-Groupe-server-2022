@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using NetflixServer.Classes;
 using netflixTestConsole.database.classes;
 
 namespace netflixAspNetCore.Controllers
 {
-    //changer le nom de la route
     [Route("api/v1/avatar")]
     [ApiController]
-    //interdire a tout le controller 
+    [EnableCors("react")]
     public class AvatarApiController : ControllerBase
     {
 
@@ -27,6 +28,7 @@ namespace netflixAspNetCore.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         //public bool Index([FromForm] IFormFile file)
         public IActionResult Post([FromForm] IFormFile file)
         {

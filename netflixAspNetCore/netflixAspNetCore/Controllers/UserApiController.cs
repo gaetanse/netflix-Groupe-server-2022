@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using netflixAspNetCore.Services;
 using NetflixServer.Classes;
@@ -10,7 +11,7 @@ namespace netflixAspNetCore.Controllers
 {
     [Route("api/v1/user")]
     [ApiController]
-    [Authorize]
+    [EnableCors("react")]
     public class UserApiController : ControllerBase
     {
         private TokenService _tokenService;
@@ -29,6 +30,7 @@ namespace netflixAspNetCore.Controllers
         }
 
         [HttpGet("role")]
+        [Authorize]
         public IActionResult GetRole()
         {
             ClaimsIdentity claimsIdentity = (ClaimsIdentity)HttpContext.User.Identity;
@@ -41,6 +43,21 @@ namespace netflixAspNetCore.Controllers
             {
                 return NotFound();
             }
+        }
+
+        [HttpPatch("setAvatar")]
+        [Authorize]
+        public IActionResult setAvatar(int id, string avatar)
+        {
+            User user = Netflix.UserRepo.FindById(id);
+            if (user != null)
+            {
+                user.Avatar = avatar;
+                Netflix.Save();
+                //return only the avatar of the user
+                return Ok(user);
+            }
+            return NotFound();
         }
 
         //ajouter get user avec un id
