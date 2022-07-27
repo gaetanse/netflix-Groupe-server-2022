@@ -60,9 +60,10 @@ var app = builder.Build();
 
 app.UseStaticFiles();
 app.UseRouting();
+
+app.UseCors();
 app.UseAuthentication(); //utilisation de jwt
 app.UseAuthorization();
-app.UseCors();
 //todo: need to remove nugget session : app.UseSession();
 
 app.MapControllers();
