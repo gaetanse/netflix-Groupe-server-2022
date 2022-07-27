@@ -30,7 +30,7 @@ namespace netflixAspNetCore.Controllers
             _faqController = faqController;
         }
 
-        [HttpGet("")]
+        [HttpGet]
         [AllowAnonymous]
         public IActionResult Get()
         {
@@ -38,6 +38,24 @@ namespace netflixAspNetCore.Controllers
             if (faqs != null)
             {
                 return Ok(faqs);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        [AllowAnonymous] //acces seulement pour un admin
+        public IActionResult Post(string question, string response)
+        {
+            if(_faqController.Create(new Faq()
+            {
+                Question = question,
+                Response = response
+            }))
+            {
+                return Ok();
             }
             else
             {
