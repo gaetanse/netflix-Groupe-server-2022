@@ -29,6 +29,18 @@ builder.Services.AddAuthentication(a =>
     };
 });
 
+builder.Services.AddAuthorization(builder =>
+{
+    builder.AddPolicy("admin", options =>
+    {
+        options.RequireClaim("statut", "admin");
+    });
+    builder.AddPolicy("user", options =>
+    {
+        options.RequireClaim("statut", "user");
+    });
+});
+
 builder.Services.AddScoped<TokenService>();
 
 builder.Services.AddCors(options =>
@@ -52,13 +64,12 @@ builder.Services.AddSession(options =>
 
 var app = builder.Build();
 
-app.UseAuthentication(); //utilisation de jwt
-app.UseAuthorization();
-
-app.UseSession();
-app.UseCors(MyAllowSpecificOrigins);
 app.UseStaticFiles();
 app.UseRouting();
+app.UseAuthentication(); //utilisation de jwt
+app.UseAuthorization();
+app.UseCors(MyAllowSpecificOrigins);
+app.UseSession();
 
 /*
  * 

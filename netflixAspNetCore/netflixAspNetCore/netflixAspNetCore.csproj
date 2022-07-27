@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>a302bda0-ea27-442e-b4e9-e25c4e7c00f6</UserSecretsId>
   </PropertyGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

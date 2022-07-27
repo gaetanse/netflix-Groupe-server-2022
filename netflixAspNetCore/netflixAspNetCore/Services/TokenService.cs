@@ -22,7 +22,7 @@ namespace netflixAspNetCore.Services
                 Statut statut = Netflix.StatutRepo.FindByUserId(user.Id);
                 if (statut != null)
                 {
-                    claim = new Claim("role", statut.Name);
+                    claim = new Claim("statut", statut.Name);
                 }
 
                 JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
