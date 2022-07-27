@@ -1,4 +1,5 @@
 ﻿using BankEntityFrameWork.Repositories;
+using CoursEntityFrameWorkCore;
 using Microsoft.EntityFrameworkCore;
 using NetflixServer.Classes;
 using netflixTestConsole.database.classes;
@@ -12,10 +13,11 @@ namespace ConsoleApp2.database
 {
     public class UserRepo : BaseRepository<User>
     {
+        DataContext _dataContext;
 
-        public User Login(string mail, string password)
+        public UserRepo(DataContext dataContext)
         {
-            return Netflix.dataContext.Users.FirstOrDefault(user => user.Mail == mail && user.Password == password);
+            _dataContext = dataContext;
         }
 
         public static bool BanUser(int id, bool newBan)
@@ -36,45 +38,49 @@ namespace ConsoleApp2.database
             return false;
         }*/
 
-        public static User GetByLastName(string lastName)
+        /*public static User GetByLastName(string lastName)
         {
             //get all users by something
-            User user = Netflix.dataContext.Users.FirstOrDefault(user => user.LastName == lastName);
+            User user = _dataContext.Users.FirstOrDefault(user => user.LastName == lastName);
             return user;
         }
 
         public static List<User> GetAllByLastName(string lastName)
         {
             //get all users by something
-            List<User> users = Netflix.dataContext.Users.Where(users => users.LastName == lastName).ToList();
+            List<User> users = _dataContext.Users.Where(users => users.LastName == lastName).ToList();
             return users;
-        }
+        }*/
 
         public override bool Create(User element)
         {
-            Netflix.dataContext.Users.Add(element);
-            return Netflix.Save();
+            _dataContext.Users.Add(element);
+            return _dataContext.SaveChanges() > 0 ? true : false;
         }
 
         public override bool Remove(User user)
         {
-            Netflix.dataContext.Users.Remove(user);
-            return Netflix.Save();
+            _dataContext.Users.Remove(user);
+            return _dataContext.SaveChanges() > 0 ? true : false;
         }
         public override User FindById(int id)
         {
-            return Netflix.dataContext.Users.Find(id);
+            return _dataContext.Users.Find(id);
+        }
+        public User Login(string mail, string password)
+        {
+            return _dataContext.Users.FirstOrDefault(user => user.Mail == mail && user.Password == password);
         }
 
         public int FindLastUserId()
         {
-            return Netflix.dataContext.Users.Max(user => user.Id);
+            return _dataContext.Users.Max(user => user.Id);
         }
 
         public override List<User> FindAll()
         {
             //verifier
-            return Netflix.dataContext.Users.ToList();
+            return _dataContext.Users.ToList();
         }
     }
 }

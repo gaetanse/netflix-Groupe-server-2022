@@ -11,7 +11,7 @@ namespace netflixTestConsole.database
 {
     public class RessourceRepo : BaseRepository<Ressource>
     {
-        public override bool Create(Ressource element)
+        /*public override bool Create(Ressource element)
         {
             throw new NotImplementedException();
         }
@@ -32,6 +32,25 @@ namespace netflixTestConsole.database
         {
             Netflix.dataContext.Ressources.Remove(ressource);
             return Netflix.Save();
+        }*/
+        public override bool Create(Ressource element)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<Ressource> FindAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Ressource FindById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Remove(Ressource element)
+        {
+            throw new NotImplementedException();
         }
     }
 }

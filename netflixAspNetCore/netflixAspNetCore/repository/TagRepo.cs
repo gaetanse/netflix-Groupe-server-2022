@@ -12,9 +12,8 @@ namespace netflixTestConsole.database
 {
     public class TagRepo : BaseRepository<Tag>
     {
-        public TagRepo() : base(){ }
 
-        public override bool Create(Tag element)
+        /*public override bool Create(Tag element)
         {
             Netflix.dataContext.Tags.Add(element);
             return Netflix.Save();
@@ -34,6 +33,25 @@ namespace netflixTestConsole.database
         {
             Netflix.dataContext.Tags.Remove(tag);
             return Netflix.Save();
+        }*/
+        public override bool Create(Tag element)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<Tag> FindAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Tag FindById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Remove(Tag element)
+        {
+            throw new NotImplementedException();
         }
     }
 }

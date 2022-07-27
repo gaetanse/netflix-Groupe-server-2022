@@ -11,7 +11,7 @@ namespace netflixTestConsole.database
 {
     public class CategoryRepo : BaseRepository<Category>
     {
-        public override bool Create(Category element)
+        /*public override bool Create(Category element)
         {
             Netflix.dataContext.Categorys.Add(element);
             return Netflix.Save();
@@ -31,6 +31,25 @@ namespace netflixTestConsole.database
         {
             Netflix.dataContext.Categorys.Remove(category);
             return Netflix.Save();
+        }*/
+        public override bool Create(Category element)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<Category> FindAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Category FindById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Remove(Category element)
+        {
+            throw new NotImplementedException();
         }
     }
 }

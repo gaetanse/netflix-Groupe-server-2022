@@ -11,7 +11,7 @@ namespace netflixTestConsole.database
 {
     public class StatutRepo : BaseRepository<Statut>
     {
-        public override bool Create(Statut element)
+        /*public override bool Create(Statut element)
         {
             Netflix.dataContext.Statuts.Add(element);
             return Netflix.Save();
@@ -36,6 +36,25 @@ namespace netflixTestConsole.database
         {
             Netflix.dataContext.Statuts.Remove(statut);
             return Netflix.Save();
+        }*/
+        public override bool Create(Statut element)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<Statut> FindAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Statut FindById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Remove(Statut element)
+        {
+            throw new NotImplementedException();
         }
     }
 }

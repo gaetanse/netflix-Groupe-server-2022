@@ -6,7 +6,7 @@ namespace ConsoleApp2.database
 {
     public class FaqRepo : BaseRepository<Faq>
     {
-        public override bool Create(Faq element)
+        /*public override bool Create(Faq element)
         {
             Netflix.dataContext.Faqs.Add(element);
             return Netflix.Save();
@@ -26,6 +26,25 @@ namespace ConsoleApp2.database
         {
             Netflix.dataContext.Faqs.Remove(faq);
             return Netflix.Save();
+        }*/
+        public override bool Create(Faq element)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<Faq> FindAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Faq FindById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Remove(Faq element)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using BankEntityFrameWork.Repositories;
+using ConsoleApp2.database;
+using CoursEntityFrameWorkCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using netflixAspNetCore.Services;
@@ -15,9 +18,15 @@ namespace netflixAspNetCore.Controllers
     public class UserApiController : ControllerBase
     {
         private TokenService _tokenService;
-        public UserApiController(TokenService tokenService)
+        private BaseRepository<User> _baseRepositoryUser;
+        private UserRepo _userRepo;
+        private DataContext _dataContext;
+        public UserApiController(TokenService tokenService,BaseRepository<User> baseRepositoryUser, UserRepo userRepo, DataContext dataContext)
         {
             _tokenService = tokenService;
+            _baseRepositoryUser = baseRepositoryUser;
+            _userRepo = userRepo;
+            _dataContext = dataContext;
         }
 
         [HttpGet("token")]
@@ -25,7 +34,7 @@ namespace netflixAspNetCore.Controllers
         public IActionResult GetToken(string mail, string password)
         {
             string token = _tokenService.Authenticate(mail, password);
-            User user = Netflix.UserRepo.Login(mail, password);
+            User user = _userRepo.Login(mail, password);
             return token != null && user != null ? Ok(new UserTokenDTO(user,token)) : NotFound(); 
         }
 
@@ -45,15 +54,23 @@ namespace netflixAspNetCore.Controllers
             }
         }
 
+        [HttpGet("statut")]
+        [Authorize]
+        public IActionResult GetStatut()
+        {
+            //TODO
+            return NotFound();
+        }
+
         [HttpPatch("setAvatar")]
         [Authorize]
         public IActionResult setAvatar(int id, string avatar)
         {
-            User user = Netflix.UserRepo.FindById(id);
+            User user = _baseRepositoryUser.FindById(id);
             if (user != null)
             {
                 user.Avatar = avatar;
-                Netflix.Save();
+                _dataContext.SaveChanges();
                 //return only the avatar of the user
                 return Ok(user);
             }

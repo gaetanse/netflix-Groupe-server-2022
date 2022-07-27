@@ -12,7 +12,7 @@ namespace netflixTestConsole.database
 {
     public class ImageDataRepo : BaseRepository<ImageData>
     {
-        public override bool Create(ImageData element)
+        /*public override bool Create(ImageData element)
         {
             Netflix.dataContext.ImageDatas.Add(element);
             return Netflix.Save();
@@ -34,6 +34,25 @@ namespace netflixTestConsole.database
         {
             Netflix.dataContext.ImageDatas.Remove(imageData);
             return Netflix.Save();
+        }*/
+        public override bool Create(ImageData element)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<ImageData> FindAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override ImageData FindById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Remove(ImageData element)
+        {
+            throw new NotImplementedException();
         }
     }
 }
