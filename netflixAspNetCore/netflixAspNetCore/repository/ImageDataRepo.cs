@@ -1,5 +1,5 @@
 ﻿using BankEntityFrameWork.Repositories;
-using NetflixServer.Classes;
+using CoursEntityFrameWorkCore;
 using netflixTestConsole.database.classes;
 using System;
 using System.Collections.Generic;
@@ -12,47 +12,31 @@ namespace netflixTestConsole.database
 {
     public class ImageDataRepo : BaseRepository<ImageData>
     {
-        /*public override bool Create(ImageData element)
-        {
-            Netflix.dataContext.ImageDatas.Add(element);
-            return Netflix.Save();
-        }
+        DataContext _dataContext;
 
-        public override List<ImageData> FindAll()
+        public ImageDataRepo(DataContext dataContext)
         {
-            //use include
-            return Netflix.dataContext.ImageDatas.ToList();
+            _dataContext = dataContext;
         }
-
-        public override ImageData FindById(int id)
-        {
-            //use include
-            return Netflix.dataContext.ImageDatas.Find(id);
-        }
-
-        public override bool Remove(ImageData imageData)
-        {
-            Netflix.dataContext.ImageDatas.Remove(imageData);
-            return Netflix.Save();
-        }*/
         public override bool Create(ImageData element)
         {
-            throw new NotImplementedException();
-        }
-
-        public override List<ImageData> FindAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override ImageData FindById(int id)
-        {
-            throw new NotImplementedException();
+            _dataContext.ImageDatas.Add(element);
+            return _dataContext.SaveChanges() > 0 ? true : false;
         }
 
         public override bool Remove(ImageData element)
         {
-            throw new NotImplementedException();
+            _dataContext.ImageDatas.Remove(element);
+            return _dataContext.SaveChanges() > 0 ? true : false;
+        }
+        public override ImageData FindById(int id)
+        {
+            return _dataContext.ImageDatas.Find(id);
+        }
+
+        public override List<ImageData> FindAll()
+        {
+            return _dataContext.ImageDatas.ToList();
         }
     }
 }

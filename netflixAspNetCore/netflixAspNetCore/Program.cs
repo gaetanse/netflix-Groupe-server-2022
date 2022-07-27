@@ -27,7 +27,7 @@ builder.Services.AddAuthentication(a =>
     o.TokenValidationParameters = new TokenValidationParameters()
     {
         //todo: changer l'endroit de la chaine
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("bonjour je suis la chaine crypto")),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("bonjour je suis la chaine de crypto")),
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
@@ -49,7 +49,7 @@ builder.Services.AddAuthorization(builder =>
 });
 
 builder.Services.AddDbContext<DataContext>();
-builder.Services.AddScoped<BaseRepository<User>, UserRepo>();
+builder.Services.AddScoped<BaseRepository<User>, UserRepo>(); //utile ?
 builder.Services.AddScoped<UserRepo>();
 builder.Services.AddScoped<BaseRepository<Faq>, FaqRepo>();
 builder.Services.AddScoped<TokenService>();

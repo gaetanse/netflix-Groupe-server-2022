@@ -1,5 +1,5 @@
 ﻿using BankEntityFrameWork.Repositories;
-using NetflixServer.Classes;
+using CoursEntityFrameWorkCore;
 using netflixTestConsole.database.classes;
 using System;
 using System.Collections.Generic;
@@ -11,45 +11,32 @@ namespace netflixTestConsole.database
 {
     public class CategoryRepo : BaseRepository<Category>
     {
-        /*public override bool Create(Category element)
+        DataContext _dataContext;
+
+        public CategoryRepo(DataContext dataContext)
         {
-            Netflix.dataContext.Categorys.Add(element);
-            return Netflix.Save();
+            _dataContext = dataContext;
         }
 
-        public override List<Category> FindAll()
-        {
-            return Netflix.dataContext.Categorys.ToList();
-        }
-
-        public override Category FindById(int id)
-        {
-            return Netflix.dataContext.Categorys.Find(id);
-        }
-
-        public override bool Remove(Category category)
-        {
-            Netflix.dataContext.Categorys.Remove(category);
-            return Netflix.Save();
-        }*/
         public override bool Create(Category element)
         {
-            throw new NotImplementedException();
-        }
-
-        public override List<Category> FindAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Category FindById(int id)
-        {
-            throw new NotImplementedException();
+            _dataContext.Categorys.Add(element);
+            return _dataContext.SaveChanges() > 0 ? true : false;
         }
 
         public override bool Remove(Category element)
         {
-            throw new NotImplementedException();
+            _dataContext.Categorys.Remove(element);
+            return _dataContext.SaveChanges() > 0 ? true : false;
+        }
+        public override Category FindById(int id)
+        {
+            return _dataContext.Categorys.Find(id);
+        }
+
+        public override List<Category> FindAll()
+        {
+            return _dataContext.Categorys.ToList();
         }
     }
 }

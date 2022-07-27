@@ -1,50 +1,36 @@
 ﻿using BankEntityFrameWork.Repositories;
-using NetflixServer.Classes;
+using CoursEntityFrameWorkCore;
 using netflixTestConsole.database.classes;
 
 namespace ConsoleApp2.database
 {
     public class FaqRepo : BaseRepository<Faq>
     {
-        /*public override bool Create(Faq element)
-        {
-            Netflix.dataContext.Faqs.Add(element);
-            return Netflix.Save();
-        }
+        DataContext _dataContext;
 
-        public override List<Faq> FindAll()
+        public FaqRepo(DataContext dataContext)
         {
-            return Netflix.dataContext.Faqs.ToList();
+            _dataContext = dataContext;
         }
-
-        public override Faq FindById(int id)
-        {
-            return Netflix.dataContext.Faqs.Find(id);
-        }
-
-        public override bool Remove(Faq faq)
-        {
-            Netflix.dataContext.Faqs.Remove(faq);
-            return Netflix.Save();
-        }*/
         public override bool Create(Faq element)
         {
-            throw new NotImplementedException();
-        }
-
-        public override List<Faq> FindAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Faq FindById(int id)
-        {
-            throw new NotImplementedException();
+            _dataContext.Faqs.Add(element);
+            return _dataContext.SaveChanges() > 0 ? true : false;
         }
 
         public override bool Remove(Faq element)
         {
-            throw new NotImplementedException();
+            _dataContext.Faqs.Remove(element);
+            return _dataContext.SaveChanges() > 0 ? true : false;
+        }
+        public override Faq FindById(int id)
+        {
+            return _dataContext.Faqs.Find(id);
+        }
+
+        public override List<Faq> FindAll()
+        {
+            return _dataContext.Faqs.ToList();
         }
     }
 }

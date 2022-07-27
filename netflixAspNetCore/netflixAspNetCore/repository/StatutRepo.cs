@@ -1,5 +1,5 @@
 ﻿using BankEntityFrameWork.Repositories;
-using NetflixServer.Classes;
+using CoursEntityFrameWorkCore;
 using netflixTestConsole.database.classes;
 using System;
 using System.Collections.Generic;
@@ -11,50 +11,31 @@ namespace netflixTestConsole.database
 {
     public class StatutRepo : BaseRepository<Statut>
     {
-        /*public override bool Create(Statut element)
-        {
-            Netflix.dataContext.Statuts.Add(element);
-            return Netflix.Save();
-        }
+        DataContext _dataContext;
 
-        public override List<Statut> FindAll()
+        public StatutRepo(DataContext dataContext)
         {
-            return Netflix.dataContext.Statuts.ToList();
+            _dataContext = dataContext;
         }
-
-        public override Statut FindById(int id)
-        {
-            return Netflix.dataContext.Statuts.Find(id);
-        }
-
-        public Statut FindByUserId(int id)
-        {
-            return Netflix.dataContext.Statuts.FirstOrDefault(statut => statut.UserId == id);
-        }
-
-        public override bool Remove(Statut statut)
-        {
-            Netflix.dataContext.Statuts.Remove(statut);
-            return Netflix.Save();
-        }*/
         public override bool Create(Statut element)
         {
-            throw new NotImplementedException();
-        }
-
-        public override List<Statut> FindAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Statut FindById(int id)
-        {
-            throw new NotImplementedException();
+            _dataContext.Statuts.Add(element);
+            return _dataContext.SaveChanges() > 0 ? true : false;
         }
 
         public override bool Remove(Statut element)
         {
-            throw new NotImplementedException();
+            _dataContext.Statuts.Remove(element);
+            return _dataContext.SaveChanges() > 0 ? true : false;
+        }
+        public override Statut FindById(int id)
+        {
+            return _dataContext.Statuts.Find(id);
+        }
+
+        public override List<Statut> FindAll()
+        {
+            return _dataContext.Statuts.ToList();
         }
     }
 }

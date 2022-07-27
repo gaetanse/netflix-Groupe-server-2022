@@ -1,5 +1,5 @@
 ﻿using BankEntityFrameWork.Repositories;
-using NetflixServer.Classes;
+using CoursEntityFrameWorkCore;
 using netflixTestConsole.database.classes;
 using System;
 using System.Collections.Generic;
@@ -11,46 +11,31 @@ namespace netflixTestConsole.database
 {
     public class RessourceRepo : BaseRepository<Ressource>
     {
-        /*public override bool Create(Ressource element)
-        {
-            throw new NotImplementedException();
-        }
+        DataContext _dataContext;
 
-        public override List<Ressource> FindAll()
+        public RessourceRepo(DataContext dataContext)
         {
-            //use include
-            return Netflix.dataContext.Ressources.ToList();
+            _dataContext = dataContext;
         }
-
-        public override Ressource FindById(int id)
-        {
-            //use include
-            return Netflix.dataContext.Ressources.Find(id);
-        }
-
-        public override bool Remove(Ressource ressource)
-        {
-            Netflix.dataContext.Ressources.Remove(ressource);
-            return Netflix.Save();
-        }*/
         public override bool Create(Ressource element)
         {
-            throw new NotImplementedException();
-        }
-
-        public override List<Ressource> FindAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Ressource FindById(int id)
-        {
-            throw new NotImplementedException();
+            _dataContext.Ressources.Add(element);
+            return _dataContext.SaveChanges() > 0 ? true : false;
         }
 
         public override bool Remove(Ressource element)
         {
-            throw new NotImplementedException();
+            _dataContext.Ressources.Remove(element);
+            return _dataContext.SaveChanges() > 0 ? true : false;
+        }
+        public override Ressource FindById(int id)
+        {
+            return _dataContext.Ressources.Find(id);
+        }
+
+        public override List<Ressource> FindAll()
+        {
+            return _dataContext.Ressources.ToList();
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using BankEntityFrameWork.Repositories;
 using ConsoleApp2.database;
 using Microsoft.IdentityModel.Tokens;
-using NetflixServer.Classes;
 using netflixTestConsole.database.classes;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;

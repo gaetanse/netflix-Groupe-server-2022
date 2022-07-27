@@ -1,7 +1,6 @@
 ﻿using BankEntityFrameWork.Repositories;
 using CoursEntityFrameWorkCore;
 using Microsoft.EntityFrameworkCore;
-using NetflixServer.Classes;
 using netflixTestConsole.database.classes;
 using System;
 using System.Collections.Generic;
@@ -19,38 +18,20 @@ namespace ConsoleApp2.database
         {
             _dataContext = dataContext;
         }
-
         public static bool BanUser(int id, bool newBan)
         {
-            //ban a user with newBan with a id
+            //todo: ban
             return false;
         }
-
-        /*public bool RequestGetLostPassword(string mail)
+        public User Login(string mail, string password)
         {
-            //get a new password by mail
-            return false;
-        }*/
-
-        /*public bool RequestIsLogin(string mail, string password)
-        {
-            //test if is login
-            return false;
-        }*/
-
-        /*public static User GetByLastName(string lastName)
-        {
-            //get all users by something
-            User user = _dataContext.Users.FirstOrDefault(user => user.LastName == lastName);
-            return user;
+            return _dataContext.Users.FirstOrDefault(user => user.Mail == mail && user.Password == password);
         }
 
-        public static List<User> GetAllByLastName(string lastName)
+        public int FindLastUserId()
         {
-            //get all users by something
-            List<User> users = _dataContext.Users.Where(users => users.LastName == lastName).ToList();
-            return users;
-        }*/
+            return _dataContext.Users.Max(user => user.Id);
+        }
 
         public override bool Create(User element)
         {
@@ -67,19 +48,9 @@ namespace ConsoleApp2.database
         {
             return _dataContext.Users.Find(id);
         }
-        public User Login(string mail, string password)
-        {
-            return _dataContext.Users.FirstOrDefault(user => user.Mail == mail && user.Password == password);
-        }
-
-        public int FindLastUserId()
-        {
-            return _dataContext.Users.Max(user => user.Id);
-        }
 
         public override List<User> FindAll()
         {
-            //verifier
             return _dataContext.Users.ToList();
         }
     }

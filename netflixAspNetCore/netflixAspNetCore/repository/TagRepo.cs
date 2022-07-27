@@ -1,6 +1,5 @@
 ﻿using BankEntityFrameWork.Repositories;
 using CoursEntityFrameWorkCore;
-using NetflixServer.Classes;
 using netflixTestConsole.database.classes;
 using System;
 using System.Collections.Generic;
@@ -12,46 +11,31 @@ namespace netflixTestConsole.database
 {
     public class TagRepo : BaseRepository<Tag>
     {
+        DataContext _dataContext;
 
-        /*public override bool Create(Tag element)
+        public TagRepo(DataContext dataContext)
         {
-            Netflix.dataContext.Tags.Add(element);
-            return Netflix.Save();
+            _dataContext = dataContext;
         }
-
-        public override List<Tag> FindAll()
-        {
-            return Netflix.dataContext.Tags.ToList();
-        }
-
-        public override Tag FindById(int id)
-        {
-            return Netflix.dataContext.Tags.Find(id);
-        }
-
-        public override bool Remove(Tag tag)
-        {
-            Netflix.dataContext.Tags.Remove(tag);
-            return Netflix.Save();
-        }*/
         public override bool Create(Tag element)
         {
-            throw new NotImplementedException();
-        }
-
-        public override List<Tag> FindAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Tag FindById(int id)
-        {
-            throw new NotImplementedException();
+            _dataContext.Tags.Add(element);
+            return _dataContext.SaveChanges() > 0 ? true : false;
         }
 
         public override bool Remove(Tag element)
         {
-            throw new NotImplementedException();
+            _dataContext.Tags.Remove(element);
+            return _dataContext.SaveChanges() > 0 ? true : false;
+        }
+        public override Tag FindById(int id)
+        {
+            return _dataContext.Tags.Find(id);
+        }
+
+        public override List<Tag> FindAll()
+        {
+            return _dataContext.Tags.ToList();
         }
     }
 }
